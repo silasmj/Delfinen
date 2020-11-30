@@ -15,10 +15,13 @@ public class Member {
 		this.email = email;
 		this.phoneNumber = pn;
 		this.id = id;
-
 		this.memberType = mType;
 		this.active = active;
 	}
+   
+   public Member(){
+   
+   }
    public String toString()   {
       return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nMember type: " + memberType + "\nActive or passive: " + active;
    }
@@ -58,7 +61,7 @@ public class Member {
    public int getId()   {
       return id;
    }
-   public void setMemberType(String mType)   {
+     public void setMemberType(String mType)   {
       this.memberType = mType;
    }
    public String getMemberType() {
@@ -69,5 +72,6 @@ public class Member {
    }
    public boolean getActive() {
       return active;
-   }	
+   }
+	
 }

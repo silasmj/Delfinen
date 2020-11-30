@@ -35,6 +35,9 @@ public class Trainer{
    public String getEmail(){
       return email;
    }
+   public int getId(){
+      return id;
+   }
    
    public int getPhone(){
       return phone;
