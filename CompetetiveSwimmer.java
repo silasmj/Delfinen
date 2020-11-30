@@ -1,18 +1,16 @@
 public class CompetetiveSwimmer extends Member {
     private String swimStyle;
-    private int ageGroup;
     private double records;
 
-    public CompetetiveSwimmer(String fn, String ln, int a, String email, int pn, int id, String act, String mType, Boolean active, String st, int ag, double r){
-      super(fn, ln, a, email, pn, id, act, mType, active);
+    public CompetetiveSwimmer(String fn, String ln, int a, String email, int pn, int id, String mType, Boolean active, String st, double r){
+      super(fn, ln, a, email, pn, id, mType, active);
       this.swimStyle = st;
-      this.ageGroup = ag;
       this.records = r;
         
     }
     
     public String toString() {
-      return "Competetive Swimmer" + "\nFirstname: " + fn + "\nLastname: " + ln + "\nAge: " + a + "\nEmail: " + email + "\nPhone number: " + pn + "\nId: " + id + "\nActivity: " + act + "\nMember type: " + mType + "\nActive or passive: " + active + "\nSwim style: " + swimStyle + "\nAge group: " + ageGroup + "\nRecords: " + records;
+      return "Competetive Swimmer" + "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nEmail: " + getEmail() + "\nPhone number: " + getPhoneNumber() + "\nId: " + getId() + "\nMember type: " + getMemberType() + "\nActive or passive: " + getActive() + "\nSwim style: " + swimStyle + "\nRecords: " + records;
     }
     
     public String getSwimStyle(){
@@ -20,23 +18,15 @@ public class CompetetiveSwimmer extends Member {
     }
     
     public void setSwimStyle(String swimStyle){
-      this.swimStyle = st;
+      this.swimStyle = swimStyle;
     }
     
-    public int getAgeGroup(){
-      return ageGroup;
-    }
-    
-    public void setAgeGroup(int ageGroup){
-      this.ageGroup = ag;
-    }
-
-    public int getRecords(){
+    public double getRecords(){
       return records;
     }
     
     public void setRecords(double records){
-      this.records = r;
+      this.records = records;
     }
 
 
