@@ -48,7 +48,7 @@ public class FileHandler{
          String st = lineScan.next();
          int id = lineScan.nextInt();
          int pl = lineScan.nextInt();
-         double time = lineScan.nextDouble();
+         String time = lineScan.next();
          Tournament to1 = new Tournament(d, st, id, pl, time);
          tournamentList.add(to1);
       }

@@ -4,9 +4,9 @@ public class Tournament{
    private String swimStyle;
    private int ID;
    private int placement;
-   private double time;
+   private String time;
 
-   public Tournament(String date, String swimStyle, int ID, int placement, double time){
+   public Tournament(String date, String swimStyle, int ID, int placement, String time){
       this.date = date;
       this.swimStyle = swimStyle;
       this.ID = ID;
@@ -31,7 +31,7 @@ public class Tournament{
    public int getPlacement(){
       return placement;
    }
-   public double getTime(){
+   public String getTime(){
       return time;
    }
 }

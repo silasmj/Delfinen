@@ -73,5 +73,16 @@ public class Member {
    public boolean getActive() {
       return active;
    }
+   public String getAgeGroup(){
+      String ageGroup;
+      if(age >= 18 && age < 60){
+         ageGroup = "senior";
+      }else if (age < 18){
+         ageGroup = "junior";
+      }else{
+         ageGroup = "pensioner";
+      }
+         return ageGroup;
+   }
 	
 }
