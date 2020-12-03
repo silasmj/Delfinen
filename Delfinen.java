@@ -8,7 +8,7 @@ public class Delfinen   {
       scan.useLocale(Locale.US);
       
       FileHandler filehandler = new FileHandler();
-      
+      showMembers(scan, filehandler);
       //mainMenu(scan, filehandler);
       
       //createNewMember(scan, filehandler);
@@ -56,10 +56,18 @@ public class Delfinen   {
    
    public static void showMembers(Scanner input, FileHandler filehandler){
       System.out.println("Members");
+      for(int i = 0; i <= filehandler.memberList.size() - 1; i++){
+
+                 
+      }
       System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member");
       int s = input.nextInt();
       if(s == 1){
-         createNewMember(input, filehandler);
+         createNewMember(input, filehandler);       
+      }else if(s == 2){
+         //deleteMember(input, filehandler);
+      }else if(s == 3){
+         //editMember(input, filehandler);
       }
    }
    
