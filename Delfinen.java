@@ -57,7 +57,7 @@ public class Delfinen   {
    public static void showMembers(Scanner input, FileHandler filehandler){
       System.out.println("Members");
       for(int i = 0; i <= filehandler.memberList.size() - 1; i++){
-         System.out.println(filehandler.memberList.get(i).getFirst);
+         System.out.println(filehandler.memberList.get(i).getFirstName());
       }
       System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
       int s = input.nextInt();
@@ -94,8 +94,6 @@ public class Delfinen   {
       String email = input.next();
       System.out.println("Enter phone number: ");
       int phoneNumber = input.nextInt();
-      System.out.println("Enter member type: ");
-      String memberType = input.next();
       System.out.println("Enter true for active or false for passive");
       boolean active = input.nextBoolean();
       if(swimmer == 2){
@@ -103,10 +101,10 @@ public class Delfinen   {
          String swimStyle = input.next();
          System.out.println("Enter records: ");
          double records = input.nextDouble();
-         CompetetiveSwimmer swimmer2 = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), memberType, active, swimStyle, records);
+         CompetetiveSwimmer swimmer2 = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, swimStyle, records);
          filehandler.memberList.add(swimmer2);
       } else if(swimmer == 1){
-         Member swimmerMotionist = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), memberType, active);
+         Member swimmerMotionist = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active);
          filehandler.memberList.add(swimmerMotionist);
       }
    }   

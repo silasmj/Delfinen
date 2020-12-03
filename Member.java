@@ -5,7 +5,6 @@ public class Member {
 	private String email;
 	private int phoneNumber;
 	private int id;
-	private String memberType;
 	private Boolean active;
 	
 	public Member(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active) {
