@@ -6,6 +6,7 @@ public class Member {
 	private int phoneNumber;
 	private int id;
 	private Boolean active;
+   private int arrears;
 	
 	public Member(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active) {
 		this.firstName = firstName;
@@ -22,6 +23,12 @@ public class Member {
    }
    public String toString()   {
       return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nActive or passive: " + active;
+   }
+   public void setArrears(int arrears){
+      this.arrears = arrears;
+   }
+   public int getArrears(){
+      return arrears;
    }
 	public void setFirstName(String fn) {
 		this.firstName = firstName;

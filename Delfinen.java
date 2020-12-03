@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.text.DecimalFormat;
+import java.lang.Math;
 
 public class Delfinen   {
    public static void main(String[] args) throws FileNotFoundException{
@@ -8,12 +9,12 @@ public class Delfinen   {
       scan.useLocale(Locale.US);
       
       FileHandler filehandler = new FileHandler();
-      showMembers(scan, filehandler);
+      //showMembers(scan, filehandler);
       //mainMenu(scan, filehandler);
       
-      //createNewMember(scan, filehandler);
+      createNewMember(scan, filehandler);
       //createTrainer(scan, filehandler);
-      createNewTournament(scan, filehandler);
+      //createNewTournament(scan, filehandler);
       
       //filehandler.printMemberToFile();
       //filehandler.printMemberFromFile();
@@ -81,7 +82,8 @@ public class Delfinen   {
    }
    
   public static void createNewMember(Scanner input, FileHandler filehandler){
-      
+     CompetetiveSwimmer compSwimmer = new CompetetiveSwimmer();
+     Member normalSwimmer = new Member();
       System.out.println("Press 1 for swimmer\nPress 2 for competetive swimmer");
       int swimmer = input.nextInt();
       System.out.println("Enter first name: ");
@@ -96,18 +98,56 @@ public class Delfinen   {
       int phoneNumber = input.nextInt();
       System.out.println("Enter true for active or false for passive");
       boolean active = input.nextBoolean();
+      String swimStyle;
       if(swimmer == 2){
          System.out.println("Enter swim style: ");
-         String swimStyle = input.next();
-         System.out.println("Enter records: ");
-         double records = input.nextDouble();
-         CompetetiveSwimmer swimmer2 = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, swimStyle, records);
-         filehandler.memberList.add(swimmer2);
+         swimStyle = input.next();
+         compSwimmer = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, swimStyle);
+         filehandler.memberList.add(compSwimmer);
       } else if(swimmer == 1){
-         Member swimmerMotionist = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active);
-         filehandler.memberList.add(swimmerMotionist);
+        normalSwimmer = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active);
+         filehandler.memberList.add(normalSwimmer);
       }
-   }   
+      
+      int priceToPay = 0;
+      if(active == true){
+         if(normalSwimmer.getAgeGroup() == "junior"){
+            priceToPay = 1000;
+         }else if(normalSwimmer.getAgeGroup() == "senior"){
+            priceToPay = 1600;
+         }else if(normalSwimmer.getAgeGroup() == "pensioner"){
+            priceToPay = 1200;
+         }
+      }else{
+         priceToPay = 500;
+      }
+      
+      System.out.println("Enter amount paid: ");
+      int amountPaid = input.nextInt();
+      
+      int newPrice = calculateArrears(priceToPay, amountPaid);
+      
+      if(newPrice <= 0){
+         System.out.println("The customer should get " + Math.abs(newPrice) + " back");
+          normalSwimmer.setArrears(0);
+      }else{
+         System.out.println("The customer got " + newPrice + " in arrears");
+         normalSwimmer.setArrears(newPrice);
+      }
+      
+      if(swimmer == 2){
+         filehandler.memberList.add(compSwimmer);
+      }else if(swimmer == 1){
+         filehandler.memberList.add(normalSwimmer);
+      }
+  }
+  
+  public static int calculateArrears(int price, int amountPaid){
+      System.out.println("Price: " + price + " amountPaid: " + amountPaid);
+      int newPrice = price - amountPaid;
+      return newPrice;
+  }  
+   
    public static void createTrainer(Scanner input, FileHandler filehandler){
       System.out.println("Enter first name: ");
       String name = input.next();
