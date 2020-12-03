@@ -30,26 +30,26 @@ public class Delfinen   {
    }
    
    public static void mainMenu(Scanner input, FileHandler filehandler){
-      System.out.println("=====Main menu=====\nD = Showdata\nS = Savedata\nQ = Quit");
+      System.out.println("=====Main menu=====\n1 = Showdata\n2 = Savedata\n3 = Quit");
       String s = input.next();
-      if(s.equalsIgnoreCase("d")){
+      if(s.equalsIgnoreCase("1")){
          showData(input, filehandler);
-      }else if(s.equalsIgnoreCase("s")){
+      }else if(s.equalsIgnoreCase("2")){
         // saveData(input, filehandler);
       }
    }
    
    public static void showData(Scanner input, FileHandler filehandler){
-      System.out.println("Data");
+      System.out.println("=====Show Data=====");
+      System.out.println("1 = Members\n2 = Trainers\n3 = Tournaments\n4 = Back");
       String s = input.next();
-      System.out.println("M = Members\nT = Trainers\nU = Tournaments\nB = Back");
-      if(s.equalsIgnoreCase("m")){
+      if(s.equalsIgnoreCase("1")){
          showMembers(input, filehandler);
-      }else if(s.equalsIgnoreCase("t")){
+      }else if(s.equalsIgnoreCase("2")){
          showTrainers(input, filehandler);
-      }else if(s.equalsIgnoreCase("u")){
+      }else if(s.equalsIgnoreCase("3")){
          showTournaments(input, filehandler);
-      }else if(s.equalsIgnoreCase("b")){
+      }else if(s.equalsIgnoreCase("4")){
          mainMenu(input, filehandler);
       }
    }
@@ -57,10 +57,9 @@ public class Delfinen   {
    public static void showMembers(Scanner input, FileHandler filehandler){
       System.out.println("Members");
       for(int i = 0; i <= filehandler.memberList.size() - 1; i++){
-
-                 
+         System.out.println(filehandler.memberList.get(i).getFirst);
       }
-      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member");
+      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
       int s = input.nextInt();
       if(s == 1){
          createNewMember(input, filehandler);       
@@ -68,6 +67,8 @@ public class Delfinen   {
          //deleteMember(input, filehandler);
       }else if(s == 3){
          //editMember(input, filehandler);
+      }else if(s == 4){
+         showData(input, filehandler);
       }
    }
    
@@ -79,7 +80,7 @@ public class Delfinen   {
       
    }
    
-   public static void createNewMember(Scanner input, FileHandler filehandler){
+  public static void createNewMember(Scanner input, FileHandler filehandler){
       
       System.out.println("Press 1 for swimmer\nPress 2 for competetive swimmer");
       int swimmer = input.nextInt();
@@ -108,8 +109,7 @@ public class Delfinen   {
          Member swimmerMotionist = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), memberType, active);
          filehandler.memberList.add(swimmerMotionist);
       }
-   }
-   
+   }   
    public static void createTrainer(Scanner input, FileHandler filehandler){
       System.out.println("Enter first name: ");
       String name = input.next();
@@ -150,7 +150,7 @@ public class Delfinen   {
       return givenID;
    }
    
-   public static int getFreeTrainerID(FileHandler filehandler){
+public static int getFreeTrainerID(FileHandler filehandler){
       ArrayList<Integer> usedIds = new ArrayList<>();
       
       int index = 0;

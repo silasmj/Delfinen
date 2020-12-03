@@ -1,16 +1,20 @@
+import java.util.ArrayList;
+
 public class CompetetiveSwimmer extends Member {
     private String swimStyle;
     private double records;
+    private ArrayList<Integer> listOfTournaments = new ArrayList<>();
+    private int trainerId;
 
-    public CompetetiveSwimmer(String fn, String ln, int a, String email, int pn, int id, String mType, Boolean active, String st, double r){
-      super(fn, ln, a, email, pn, id, mType, active);
-      this.swimStyle = st;
-      this.records = r;
+    public CompetetiveSwimmer(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active, String swimStyle, double records){
+      super(firstName, lastName, age, email, phoneNumber, id, active);
+      this.swimStyle = swimStyle;
+      this.records = records;
         
     }
     
     public String toString() {
-      return "Competetive Swimmer" + "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nEmail: " + getEmail() + "\nPhone number: " + getPhoneNumber() + "\nId: " + getId() + "\nMember type: " + getMemberType() + "\nActive or passive: " + getActive() + "\nSwim style: " + swimStyle + "\nRecords: " + records;
+      return "Competetive Swimmer" + "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nEmail: " + getEmail() + "\nPhone number: " + getPhoneNumber() + "\nId: " + getId() + "\nActive or passive: " + getActive() + "\nSwim style: " + swimStyle + "\nRecords: " + records;
     }
     
     public String getSwimStyle(){

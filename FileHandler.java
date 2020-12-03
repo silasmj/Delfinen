@@ -12,15 +12,14 @@ public class FileHandler{
       while(read.hasNextLine())  {
          String line = read.nextLine();
          Scanner lineScan = new Scanner(line);
-         String fn = lineScan.next();
-         String ln = lineScan.next();
+         String firstName = lineScan.next();
+         String lastName = lineScan.next();
          int age = lineScan.nextInt();
          String email = lineScan.next();
-         int pn = lineScan.nextInt();
+         int phoneNumber = lineScan.nextInt();
          int id = lineScan.nextInt();
-         String mType = lineScan.next();
          Boolean active = lineScan.nextBoolean();
-         Member m1 = new Member(fn, ln, age, email, pn, id, mType, active);
+         Member m1 = new Member(firstName, lastName, age, email, phoneNumber, id, active);
          memberList.add(m1);
       } 
    }
@@ -30,11 +29,11 @@ public class FileHandler{
       while(scan.hasNextLine()){
          String line = scan.nextLine();
          Scanner lineScan = new Scanner(line);
-         String n = lineScan.next();
+         String name = lineScan.next();
          String email = lineScan.next();
-         int phone = lineScan.nextInt();
+         int phoneNumber = lineScan.nextInt();
          int id = lineScan.nextInt();
-         Trainer t1 = new Trainer(n, email, phone, id);
+         Trainer t1 = new Trainer(name, email, phoneNumber, id);
          trainerList.add(t1);
       }
    }
@@ -44,19 +43,19 @@ public class FileHandler{
       while(scan.hasNextLine()){
          String line = scan.nextLine();
          Scanner lineScan = new Scanner(line);
-         String d = lineScan.next();
-         String st = lineScan.next();
+         String date = lineScan.next();
+         String swimStyle = lineScan.next();
          int id = lineScan.nextInt();
-         int pl = lineScan.nextInt();
+         int placement = lineScan.nextInt();
          String time = lineScan.next();
-         Tournament to1 = new Tournament(d, st, id, pl, time);
+         Tournament to1 = new Tournament(date, swimStyle, id, placement, time);
          tournamentList.add(to1);
       }
    }
    public void printMemberToFile() throws FileNotFoundException{
       PrintStream write = new PrintStream(new File("member.txt"));
       for(int i = 0; i <= memberList.size() - 1; i++){
-          write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getMemberType() + " " + memberList.get(i).getActive());
+          write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive());
           if(i != memberList.size() - 1){
               System.out.print("\n");
           }

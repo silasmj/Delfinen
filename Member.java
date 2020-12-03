@@ -8,14 +8,13 @@ public class Member {
 	private String memberType;
 	private Boolean active;
 	
-	public Member(String fn, String ln, int a, String email, int pn, int id, String mType, Boolean active) {
-		this.firstName = fn;
-		this.lastName = ln;
-		this.age = a;
+	public Member(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
 		this.email = email;
-		this.phoneNumber = pn;
+		this.phoneNumber = phoneNumber;
 		this.id = id;
-		this.memberType = mType;
 		this.active = active;
 	}
    
@@ -23,22 +22,22 @@ public class Member {
    
    }
    public String toString()   {
-      return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nMember type: " + memberType + "\nActive or passive: " + active;
+      return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nActive or passive: " + active;
    }
 	public void setFirstName(String fn) {
-		this.firstName = fn;
+		this.firstName = firstName;
 	}
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setLastName(String ln)	{
-		this.lastName = ln;
+		this.lastName = lastName;
 	}
 	public String getLastName() {
 		return lastName;
 	}
    public void setAge(int a) {
-      this.age = a;
+      this.age = age;
    }
    public int getAge()  {
       return age;
@@ -50,7 +49,7 @@ public class Member {
       return email;
    }
    public void setPhoneNumber(int pn)  {
-      this.phoneNumber = pn;
+      this.phoneNumber = phoneNumber;
    }
    public int getPhoneNumber()   {
       return phoneNumber;
@@ -61,12 +60,7 @@ public class Member {
    public int getId()   {
       return id;
    }
-     public void setMemberType(String mType)   {
-      this.memberType = mType;
-   }
-   public String getMemberType() {
-      return memberType;
-   }
+
    public void setActive(Boolean active) {
       this.active = active;
    }
