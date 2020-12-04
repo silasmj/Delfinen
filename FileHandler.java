@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class FileHandler{
-  ArrayList<Member> memberList = new ArrayList<>();
-  ArrayList<Trainer> trainerList = new ArrayList<>();
-  ArrayList<Tournament> tournamentList = new ArrayList<>();
+  private ArrayList<Member> memberList = new ArrayList<>();
+  private ArrayList<Trainer> trainerList = new ArrayList<>();
+  private ArrayList<Tournament> tournamentList = new ArrayList<>();
   
    public void printMemberFromFile() throws FileNotFoundException  {
       File f = new File("member.txt");
@@ -53,12 +53,16 @@ public class FileHandler{
       }
    }
    public void printMemberToFile() throws FileNotFoundException{
-      PrintStream write = new PrintStream(new File("member.txt"));
-      for(int i = 0; i <= memberList.size() - 1; i++){
-          write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive());
-          if(i != memberList.size() - 1){
-              System.out.print("\n");
-          }
+      try {
+         PrintStream write = new PrintStream(new File("member.txt"));
+         for(int i = 0; i <= memberList.size() - 1; i++){
+             write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive());
+             if(i != memberList.size() - 1){
+                 write.print("\n");
+             }
+         }
+      } catch (FileNotFoundException e) {
+         e.printStackTrace();
       }
    }
    public void printTrainerToFile() throws FileNotFoundException{
@@ -66,7 +70,7 @@ public class FileHandler{
       for(int i = 0; i <= trainerList.size() - 1; i++){
          write.print(trainerList.get(i).getName() + " " + trainerList.get(i).getEmail() + " " + trainerList.get(i).getPhone() + " " + trainerList.get(i).getId());
          if(i != trainerList.size() - 1){
-            System.out.print("\n");
+            write.print("\n");
          }
       }
    }
@@ -75,8 +79,17 @@ public class FileHandler{
       for(int i = 0; i <= tournamentList.size() - 1; i++){
          write.print(tournamentList.get(i).getDate() + " " + tournamentList.get(i).getSwimStyle() + " " + tournamentList.get(i).getId() + " " + tournamentList.get(i).getPlacement() + " " + tournamentList.get(i).getTime());
          if(i != tournamentList.size() - 1){
-            System.out.print("\n");
+            write.print("\n");
          }
       }
+   }
+   public ArrayList<Tournament> getTournamentList(){
+      return tournamentList;
+   }
+   public ArrayList<Member> getMemberList(){
+      return memberList;
+   }
+   public ArrayList<Trainer> getTrainerList(){
+      return trainerList;
    }
 }

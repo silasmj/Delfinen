@@ -2,20 +2,23 @@ public class Tournament{
 
    private String date;
    private String swimStyle;
-   private int ID;
+   private int Id;
    private int placement;
    private String time;
 
-   public Tournament(String date, String swimStyle, int ID, int placement, String time){
+   public Tournament(String date, String swimStyle, int Id, int placement, String time){
       this.date = date;
       this.swimStyle = swimStyle;
-      this.ID = ID;
+      this.Id = Id;
       this.placement = placement;
       this.time = time;
    }
+   public Tournament()  {
+   
+   }
 
    public String toString(){
-      return "Date: " + date + "\nswimStyle: " + swimStyle + "\nID: " + ID + "\nplacement: " + placement + "\ntime: " + time;
+      return "Date: " + date + "\nswimStyle: " + swimStyle + "\nID: " + Id + "\nplacement: " + placement + "\ntime: " + time;
    }
 
    public String getDate(){
@@ -26,12 +29,27 @@ public class Tournament{
       return swimStyle;
    }
    public int getId(){
-      return ID;
+      return Id;
    }
    public int getPlacement(){
       return placement;
    }
    public String getTime(){
       return time;
+   }
+   public void setId(int Id){
+      this.Id = Id;
+   }
+   public void setDate(String date){
+      this.date = date;
+   }
+   public void setSwimStyle(String swimStyle){
+      this.swimStyle = swimStyle;
+   }
+   public void setPlacement(int placement){
+      this.placement = placement;
+   }
+   public void setTime(String time){
+      this.time = time;
    }
 }

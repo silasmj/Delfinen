@@ -22,6 +22,12 @@ public class Member {
    
    }
    public String toString()   {
+      String sActive;
+      if(active == true)  {
+         sActive = "active";
+      }else{
+         sActive = "passive";
+      }
       return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nActive or passive: " + active;
    }
    public void setArrears(int arrears){
