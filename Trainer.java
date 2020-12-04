@@ -10,6 +10,8 @@ public class Trainer{
       this.phone = phone;
       this.id = id;
    }
+   public Trainer()  {
+   }
    public void setName(String name){
       this.name = name;
    }

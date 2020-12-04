@@ -316,5 +316,33 @@ public class Delfinen   {
          }
       }
    }
+   public static void editTrainer(Scanner input, FileHandler filehandler, int selectedId){
+      Trainer tempTrainer = new Trainer();
+      int number = 0;
+
+      for(int i = 0; i <= filehandler.getTrainerList().size() - 1; i++){
+         if(filehandler.getTrainerList().get(i).getId() == selectedId){
+         tempTrainer = filehandler.getTrainerList().get(i);
+         number = i;
+
+         }
+         System.out.println("Change name from: " + tempTrainer.getName() + "to: ");
+         String newName = input.next();
+         if(!newName.equalsIgnoreCase("0")){
+            tempTrainer.setName(newName);
+         }
+
+      }
+      System.out.println("Change email from: " + tempTrainer.getEmail() + "to: "); 
+      String newEmail = input.next();
+      if(!newEmail.equalsIgnoreCase("0")){
+         tempTrainer.setEmail(newEmail);
+      }
+      System.out.println("Change phone from: " + tempTrainer.getPhone() + "to: ");
+      int newPhone = input.nextInt();
+      if(newPhone != 0){
+         tempTrainer.setPhone(newPhone);
+      }
+   }
   
 }
