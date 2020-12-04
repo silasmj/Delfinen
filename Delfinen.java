@@ -95,8 +95,24 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
 
    
    public static void showTournaments(Scanner input, FileHandler filehandler){
-      
-   }
+      System.out.println("==========Trainers==========");
+      for(int i = 0; i <= filehandler.getTournamentList().size() - 1; i++){
+         System.out.println("Date :" + filehandler.getTournamentList().get(i).getDate() + "\nSwim style: " + filehandler.getTournamentList().get(i).getSwimStyle() + "\nID: " + filehandler.getTournamentList().get(i).getId() + "\nPlacement: " + filehandler.getTournamentList().get(i).getPlacement() + "\nTime " + filehandler.getTournamentList().get(i).getTime());
+      }
+      System.out.println("1 = Create tournament\n2 = Delete tournament\n3 = Edit tournament\n4 = Back");
+      int s = input.nextInt();
+      if(s == 1){
+         createNewTournament(input, filehandler);       
+      }else if(s == 2){
+         System.out.println("Enter ID of the tournament that you want to delete");
+         int selectedId = input.nextInt();
+         deleteTournament(filehandler, input, selectedId);
+      }else if(s == 3){
+         //editTournament(input, filehandler);
+      }else if(s == 4){
+         showData(input, filehandler);
+      }
+   }  
    
   public static void createNewMember(Scanner input, FileHandler filehandler){
      CompetetiveSwimmer compSwimmer = new CompetetiveSwimmer();
@@ -305,9 +321,9 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       }
       showMembers(input, filehandler);
     }
-    public static void deleteTournament(FileHandler filehandler, Scanner input, int selectedID){
+    public static void deleteTournament(FileHandler filehandler, Scanner input, int selectedId){
       for(int i = 0; i <= filehandler.getTournamentList().size() - 1; i++){
-         if(filehandler.getTournamentList().get(i).getId() == selectedID){
+         if(filehandler.getTournamentList().get(i).getId() == selectedId){
             System.out.println("Are you sure you want to delete: " + filehandler.getTournamentList().get(i).getId() + "\nAnswer with Y/N");
             String answer = input.next();
             if (answer.equalsIgnoreCase("y")){
