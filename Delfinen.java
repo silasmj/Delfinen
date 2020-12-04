@@ -73,7 +73,7 @@ public class Delfinen   {
       }
    }
    
-   public static void showTrainers(Scanner input, FileHandler filehandler){
+public static void showTrainers(Scanner input, FileHandler filehandler){
       System.out.println("Trainers");
       for(int i = 0; i <= filehandler.getTrainerList().size() - 1; i++){
          System.out.println("Name: " + filehandler.getTrainerList().get(i).getName() + "\nEmail: " + filehandler.getTrainerList().get(i).getEmail() + "\nPhone: " + filehandler.getTrainerList().get(i).getPhone() + "\nId: " + filehandler.getTrainerList().get(i).getId());
@@ -83,7 +83,9 @@ public class Delfinen   {
       if(s == 1){
          createTrainer(input, filehandler);
       }else if(s == 2){
-         //deleteTrainer(input, filehandler);
+         System.out.println("Give ID");
+         int selectedID = input.nextInt();
+         deleteTrainer(input, filehandler, selectedID);
       }else if(s == 3){
          //editTrainer(input, filehandler);
       }else if(s == 4){
@@ -164,7 +166,7 @@ public class Delfinen   {
       return newPrice;
   }  
    
-   public static void createTrainer(Scanner input, FileHandler filehandler){
+public static void createTrainer(Scanner input, FileHandler filehandler){
       System.out.println("Enter first name: ");
       String name = input.next();
       System.out.println("Enter email: ");
@@ -174,6 +176,7 @@ public class Delfinen   {
       
       Trainer newTrainer = new Trainer(name, email, phone, 1);
       filehandler.getTrainerList().add(newTrainer);
+      showTrainers(input, filehandler);
    }
    public static void createNewTournament(Scanner input, FileHandler filehandler){
       System.out.println("Enter date");
@@ -344,5 +347,19 @@ public class Delfinen   {
          tempTrainer.setPhone(newPhone);
       }
    }
-  
+   public static void deleteTrainer(Scanner input, FileHandler filehandler, int selectedID){
+      int index = 0;
+      for (Trainer selectedTrainer : filehandler.getTrainerList()){
+         if(selectedID == selectedTrainer.getId()){
+            System.out.println("You sure you want to delete: " + selectedTrainer.getName() + " (True/False)");
+            Boolean confirmDeletion = input.nextBoolean();
+            if(confirmDeletion == true){
+               filehandler.getTrainerList().remove(index);
+            }
+            break;
+         }
+         index++;
+      }
+      showTrainers(input, filehandler);
+    }
 }
