@@ -68,9 +68,13 @@ public class Delfinen   {
       if(s == 1){
          createNewMember(input, filehandler);       
       }else if(s == 2){
-         //deleteMember(input, filehandler);
+         System.out.println("Give the Id of the member you want to delete:");
+         int selectedId = input.nextInt();
+         deleteMember(input, filehandler, selectedId);
       }else if(s == 3){
-         //editMember(input, filehandler);
+         System.out.println("Give the Id of the member you want to edit:");
+         int selectedId = input.nextInt();
+         //editMember(input, filehandler, selectedId);
       }else if(s == 4){
          showData(input, filehandler);
       }
@@ -86,11 +90,13 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       if(s == 1){
          createTrainer(input, filehandler);
       }else if(s == 2){
-         System.out.println("Give ID");
-         int selectedID = input.nextInt();
-         deleteTrainer(input, filehandler, selectedID);
+         System.out.println("Give the Id of the trainer you want to delete: ");
+         int selectedId = input.nextInt();
+         deleteTrainer(input, filehandler, selectedId);
       }else if(s == 3){
-         //editTrainer(input, filehandler);
+         System.out.println("Give the Id of the trainer you want to edit:");
+         int selectedId = input.nextInt();
+         editTrainer(input, filehandler, selectedId);
       }else if(s == 4){
          showData(input, filehandler);
       }
@@ -107,11 +113,13 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       if(s == 1){
          createNewTournament(input, filehandler);       
       }else if(s == 2){
-         System.out.println("Enter ID of the tournament that you want to delete");
+         System.out.println("Enter the ID of the tournament that you want to delete");
          int selectedId = input.nextInt();
-         deleteTournament(filehandler, input, selectedId);
+         deleteTournament(input, filehandler, selectedId);
       }else if(s == 3){
-         //editTournament(input, filehandler);
+          System.out.println("Enter the ID of the tournament that you want to edit");
+          int selectedId = input.nextInt();
+          editTournament(input, filehandler, selectedId);
       }else if(s == 4){
          showData(input, filehandler);
       }
@@ -206,7 +214,7 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       System.out.println("Enter phone: ");
       int phone= input.nextInt();
       
-      Trainer newTrainer = new Trainer(name, email, phone, 1);
+      Trainer newTrainer = new Trainer(name, email, phone, getFreeTrainerID(filehandler));
       filehandler.getTrainerList().add(newTrainer);
       showTrainers(input, filehandler);
    }
@@ -219,7 +227,7 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       int placement = input.nextInt();
       System.out.println("Enter time");
       String time = input.next();
-      Tournament t1 = new Tournament(date, swimStyle, 1, placement, time);
+      Tournament t1 = new Tournament(date, swimStyle, getFreeTournamentID(filehandler), placement, time);
       filehandler.getTournamentList().add(t1);
    }
     
@@ -322,10 +330,10 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          e.printStackTrace();
      }
    }
-   public static void deleteMember(Scanner input, FileHandler filehandler, int selectedID){
+   public static void deleteMember(Scanner input, FileHandler filehandler, int selectedId){
       int index = 0;
       for (Member selectedMember : filehandler.getMemberList()){
-         if(selectedID == selectedMember.getId()){
+         if(selectedId == selectedMember.getId()){
             System.out.println("You sure you want to delete: " + selectedMember.getFirstName() + " (True/False)");
             Boolean confirmDeletion = input.nextBoolean();
             if(confirmDeletion == true){
@@ -337,20 +345,22 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       }
       showMembers(input, filehandler);
     }
-    public static void deleteTournament(FileHandler filehandler, Scanner input, int selectedId){
-      for(int i = 0; i <= filehandler.getTournamentList().size() - 1; i++){
-         if(filehandler.getTournamentList().get(i).getId() == selectedId){
-            System.out.println("Are you sure you want to delete: " + filehandler.getTournamentList().get(i).getId() + "\nAnswer with Y/N");
-            String answer = input.next();
-            if (answer.equalsIgnoreCase("y")){
-               System.out.println("Successfully deleted: " + filehandler.getTournamentList().get(i).getId());
-               filehandler.getTournamentList().remove(i);  
-            }else{
-  //             showTournament(filehandler, input);
+   public static void deleteTournament(Scanner input, FileHandler filehandler, int selectedId){
+      int index = 0;
+      for (Tournament selectedTournament : filehandler.getTournamentList()){
+         if(selectedId == selectedTournament.getId()){
+            System.out.println("You sure you want to delete: " + selectedTournament.getId() + " (True/False)");
+            Boolean confirmDeletion = input.nextBoolean();
+            if(confirmDeletion == true){
+               filehandler.getTournamentList().remove(index);
             }
+            break;
          }
+         index++;
       }
-   }
+      showTournaments(input, filehandler);
+    }
+
    public static void editTrainer(Scanner input, FileHandler filehandler, int selectedId){
       Trainer tempTrainer = new Trainer();
       int number = 0;
@@ -379,10 +389,10 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          tempTrainer.setPhone(newPhone);
       }
    }
-   public static void deleteTrainer(Scanner input, FileHandler filehandler, int selectedID){
+   public static void deleteTrainer(Scanner input, FileHandler filehandler, int selectedId){
       int index = 0;
       for (Trainer selectedTrainer : filehandler.getTrainerList()){
-         if(selectedID == selectedTrainer.getId()){
+         if(selectedId == selectedTrainer.getId()){
             System.out.println("You sure you want to delete: " + selectedTrainer.getName() + " (True/False)");
             Boolean confirmDeletion = input.nextBoolean();
             if(confirmDeletion == true){
