@@ -19,7 +19,8 @@ public class FileHandler{
          int phoneNumber = lineScan.nextInt();
          int id = lineScan.nextInt();
          Boolean active = lineScan.nextBoolean();
-         Member m1 = new Member(firstName, lastName, age, email, phoneNumber, id, active);
+         int arrears = lineScan.nextInt();
+         Member m1 = new Member(firstName, lastName, age, email, phoneNumber, id, active, arrears);
          memberList.add(m1);
       } 
    }
@@ -56,7 +57,7 @@ public class FileHandler{
       try {
          PrintStream write = new PrintStream(new File("member.txt"));
          for(int i = 0; i <= memberList.size() - 1; i++){
-             write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive());
+             write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive() + " " + memberList.get(i).getArrears());
              if(i != memberList.size() - 1){
                  write.print("\n");
              }

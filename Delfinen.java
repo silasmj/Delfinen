@@ -10,24 +10,27 @@ public class Delfinen   {
       
       FileHandler filehandler = new FileHandler();
       //showMembers(input, filehandler);
-      mainMenu(input, filehandler);
+      
       
       //createNewMember(input, filehandler);
       //createTrainer(input, filehandler);
       //createNewTournament(input, filehandler);
       
       //filehandler.printMemberToFile();
-      //filehandler.printMemberFromFile();
+      filehandler.printMemberFromFile();
       
-      filehandler.printTrainerToFile();
+      //filehandler.printTrainerToFile();
       filehandler.printTrainerFromFile();
+     
       
-      filehandler.printTournamentToFile();
+      //filehandler.printTournamentToFile();
       filehandler.printTournamentFromFile();
       
       //System.out.println(filehandler.memberList);
       //System.out.println(filehandler.trainerList);
       //System.out.println(filehandler.tournamentList);
+      
+      mainMenu(input, filehandler);
    }
    
    public static void mainMenu(Scanner input, FileHandler filehandler){
@@ -36,7 +39,7 @@ public class Delfinen   {
       if(s.equalsIgnoreCase("1")){
          showData(input, filehandler);
       }else if(s.equalsIgnoreCase("2")){
-        // saveData(input, filehandler);
+        saveData(input, filehandler);
       }
    }
    
@@ -58,7 +61,7 @@ public class Delfinen   {
    public static void showMembers(Scanner input, FileHandler filehandler){
       System.out.println("Members");
       for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
-         System.out.println("First name: " + filehandler.getMemberList().get(i).getFirstName() + "\nLast Name: " + filehandler.getMemberList().get(i).getLastName() + "\nAge: " + filehandler.getMemberList().get(i).getAge() + "\nEmail: " + filehandler.getMemberList().get(i).getEmail() + "\nPhone Number: " + filehandler.getMemberList().get(i).getPhoneNumber() + "\nId: " + filehandler.getMemberList().get(i).getId() + "Active or passive - True for active, false for passive: " + filehandler.getMemberList().get(i).getActive() + "\nArrrears: " + filehandler.getMemberList().get(i).getArrears());
+         System.out.println("First name: " + filehandler.getMemberList().get(i).getFirstName() + "\nLast Name: " + filehandler.getMemberList().get(i).getLastName() + "\nAge: " + filehandler.getMemberList().get(i).getAge() + "\nEmail: " + filehandler.getMemberList().get(i).getEmail() + "\nPhone Number: " + filehandler.getMemberList().get(i).getPhoneNumber() + "\nId: " + filehandler.getMemberList().get(i).getId() + "\nActive or passive - True for active, false for passive: " + filehandler.getMemberList().get(i).getActive() + "\nArrears: " + filehandler.getMemberList().get(i).getArrears());
       }
       System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
       int s = input.nextInt();
@@ -131,15 +134,14 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       int phoneNumber = input.nextInt();
       System.out.println("Enter true for active or false for passive");
       boolean active = input.nextBoolean();
+      int arrears = 0;
       String swimStyle;
       if(swimmer == 2){
          System.out.println("Enter swim style: ");
          swimStyle = input.next();
-         compSwimmer = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, swimStyle);
-         filehandler.getMemberList().add(compSwimmer);
+         compSwimmer = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears, swimStyle);
       } else if(swimmer == 1){
-        normalSwimmer = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active);
-         filehandler.getMemberList().add(normalSwimmer);
+        normalSwimmer = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears);
       }
       
       int priceToPay = 0;
@@ -163,13 +165,16 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       if(newPrice <= 0){
          System.out.println("The customer should get " + Math.abs(newPrice) + " back");
           normalSwimmer.setArrears(0);
+          compSwimmer.setArrears(0);
       }else{
          System.out.println("The customer got " + newPrice + " left to pay");
          normalSwimmer.setArrears(newPrice);
+         compSwimmer.setArrears(newPrice);
       }
       
       if(swimmer == 2){
          filehandler.getMemberList().add(compSwimmer);
+
       }else if(swimmer == 1){
          filehandler.getMemberList().add(normalSwimmer);
       }

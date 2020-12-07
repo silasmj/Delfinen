@@ -8,7 +8,7 @@ public class Member {
 	private Boolean active;
    private int arrears;
 	
-	public Member(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active) {
+	public Member(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active, int arrears) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -16,6 +16,7 @@ public class Member {
 		this.phoneNumber = phoneNumber;
 		this.id = id;
 		this.active = active;
+      this.arrears = arrears;
 	}
    
    public Member(){
@@ -28,7 +29,7 @@ public class Member {
       }else{
          sActive = "passive";
       }
-      return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nActive or passive: " + active;
+      return "Member: " + "\nFirstname: " + firstName + "\nLastname: " + lastName + "\nAge: " + age + "\nEmail: " + email + "\nPhone number: " + phoneNumber + "\nId: " + id + "\nActive or passive: " + active + "\nArrears: " + arrears;
    }
    public void setArrears(int arrears){
       this.arrears = arrears;
