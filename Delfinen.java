@@ -59,44 +59,50 @@ public class Delfinen   {
    }
    
    public static void showMembers(Scanner input, FileHandler filehandler){
-      System.out.println("Members");
+      System.out.println("==========Members==========");
       for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
-         System.out.println("First name: " + filehandler.getMemberList().get(i).getFirstName() + "\nLast Name: " + filehandler.getMemberList().get(i).getLastName() + "\nAge: " + filehandler.getMemberList().get(i).getAge() + "\nEmail: " + filehandler.getMemberList().get(i).getEmail() + "\nPhone Number: " + filehandler.getMemberList().get(i).getPhoneNumber() + "\nId: " + filehandler.getMemberList().get(i).getId() + "\nActive or passive - True for active, false for passive: " + filehandler.getMemberList().get(i).getActive() + "\nArrears: " + filehandler.getMemberList().get(i).getArrears());
+         System.out.println("First name: " + filehandler.getMemberList().get(i).getFirstName() + "\nLast Name: " + filehandler.getMemberList().get(i).getLastName() + "\nAge: " + filehandler.getMemberList().get(i).getAge() + "\nEmail: " + filehandler.getMemberList().get(i).getEmail() + "\nPhone Number: " + filehandler.getMemberList().get(i).getPhoneNumber() + "\nId: " + filehandler.getMemberList().get(i).getId() + "\nActive or passive - True for active, false for passive: " + filehandler.getMemberList().get(i).getActive() + "\nArrears: " + filehandler.getMemberList().get(i).getArrears() + "\n====================");
       }
       System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
       int s = input.nextInt();
       if(s == 1){
-         createNewMember(input, filehandler);       
+         createNewMember(input, filehandler);  
+         showMembers(input, filehandler);     
       }else if(s == 2){
          System.out.println("Give the Id of the member you want to delete:");
          int selectedId = input.nextInt();
          deleteMember(input, filehandler, selectedId);
+         showMembers(input, filehandler);  
       }else if(s == 3){
          System.out.println("Give the Id of the member you want to edit:");
          int selectedId = input.nextInt();
          //editMember(input, filehandler, selectedId);
+         showMembers(input, filehandler);  
       }else if(s == 4){
          showData(input, filehandler);
       }
    }
    
 public static void showTrainers(Scanner input, FileHandler filehandler){
-      System.out.println("Trainers");
+      System.out.println("==========Trainers==========");
       for(int i = 0; i <= filehandler.getTrainerList().size() - 1; i++){
-         System.out.println("Name: " + filehandler.getTrainerList().get(i).getName() + "\nEmail: " + filehandler.getTrainerList().get(i).getEmail() + "\nPhone: " + filehandler.getTrainerList().get(i).getPhone() + "\nId: " + filehandler.getTrainerList().get(i).getId());
+         System.out.println("Name: " + filehandler.getTrainerList().get(i).getName() + "\nEmail: " + filehandler.getTrainerList().get(i).getEmail() + "\nPhone: " + filehandler.getTrainerList().get(i).getPhone() + "\nId: " + filehandler.getTrainerList().get(i).getId() + "\n====================");
       }
       System.out.println("1 = Create trainer\n2 = Delete trainer\n3 = Edit trainer\n4 = Back");
       int s = input.nextInt();
       if(s == 1){
          createTrainer(input, filehandler);
+         showTrainers(input, filehandler);
       }else if(s == 2){
          System.out.println("Give the Id of the trainer you want to delete: ");
          int selectedId = input.nextInt();
          deleteTrainer(input, filehandler, selectedId);
+         showTrainers(input, filehandler);
       }else if(s == 3){
          System.out.println("Give the Id of the trainer you want to edit:");
          int selectedId = input.nextInt();
          editTrainer(input, filehandler, selectedId);
+         showTrainers(input, filehandler);
       }else if(s == 4){
          showData(input, filehandler);
       }
@@ -104,22 +110,25 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
 
    
    public static void showTournaments(Scanner input, FileHandler filehandler){
-      System.out.println("==========Trainers==========");
+      System.out.println("==========Tournaments==========");
       for(int i = 0; i <= filehandler.getTournamentList().size() - 1; i++){
-         System.out.println("Date :" + filehandler.getTournamentList().get(i).getDate() + "\nSwim style: " + filehandler.getTournamentList().get(i).getSwimStyle() + "\nID: " + filehandler.getTournamentList().get(i).getId() + "\nPlacement: " + filehandler.getTournamentList().get(i).getPlacement() + "\nTime " + filehandler.getTournamentList().get(i).getTime());
+         System.out.println("Date :" + filehandler.getTournamentList().get(i).getDate() + "\nSwim style: " + filehandler.getTournamentList().get(i).getSwimStyle() + "\nID: " + filehandler.getTournamentList().get(i).getId() + "\nPlacement: " + filehandler.getTournamentList().get(i).getPlacement() + "\nTime " + filehandler.getTournamentList().get(i).getTime() + "\n====================");
       }
       System.out.println("1 = Create tournament\n2 = Delete tournament\n3 = Edit tournament\n4 = Back");
       int s = input.nextInt();
       if(s == 1){
-         createNewTournament(input, filehandler);       
+         createNewTournament(input, filehandler); 
+         showTournaments(input, filehandler);      
       }else if(s == 2){
          System.out.println("Enter the ID of the tournament that you want to delete");
          int selectedId = input.nextInt();
          deleteTournament(input, filehandler, selectedId);
+         showTournaments(input, filehandler); 
       }else if(s == 3){
           System.out.println("Enter the ID of the tournament that you want to edit");
           int selectedId = input.nextInt();
           editTournament(input, filehandler, selectedId);
+          showTournaments(input, filehandler); 
       }else if(s == 4){
          showData(input, filehandler);
       }
@@ -311,7 +320,7 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          String answer = input.next();
          if(answer.equalsIgnoreCase("y")){
             filehandler.getTournamentList().set(indexNumber, tempTour);
-            System.out.println("Edited firm: \n" + filehandler.getTournamentList().get(indexNumber));
+            System.out.println("Edited tournament: \n" + filehandler.getTournamentList().get(indexNumber));
          }else if(answer.equalsIgnoreCase("n"))  {
             editTournament(input, filehandler, selectedId);
          }else{
