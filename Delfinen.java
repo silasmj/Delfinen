@@ -4,14 +4,14 @@ import java.text.DecimalFormat;
 import java.lang.Math;
 
 public class Delfinen   {
-   public static void main(String[] args) throws FileNotFoundException{
+   public static void main(String[] args) throws FileNotFoundException, IOException{
       Scanner input = new Scanner(System.in);
       input.useLocale(Locale.US);
       
       FileHandler filehandler = new FileHandler();
       //showMembers(input, filehandler);
       
-      
+      filehandler.createFile();
       //createNewMember(input, filehandler);
       //createTrainer(input, filehandler);
       //createNewTournament(input, filehandler);
@@ -143,20 +143,31 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       } else if(swimmer == 1){
         normalSwimmer = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears);
       }
-      
+     
       int priceToPay = 0;
       if(active == true){
-         if(normalSwimmer.getAgeGroup() == "junior"){
-            priceToPay = 1000;
-         }else if(normalSwimmer.getAgeGroup() == "senior"){
-            priceToPay = 1600;
-         }else if(normalSwimmer.getAgeGroup() == "pensioner"){
-            priceToPay = 1200;
+        if(swimmer == 1)   { 
+            if(normalSwimmer.getAgeGroup() == "junior"){
+               priceToPay = 1000;
+            }else if(normalSwimmer.getAgeGroup() == "senior"){
+               priceToPay = 1600;
+            }else if(normalSwimmer.getAgeGroup() == "pensioner"){
+               priceToPay = 1200;
+            }
+         }else if(swimmer == 2){
+            if(compSwimmer.getAgeGroup() == "junior"){
+               priceToPay = 1000;
+            }else if(compSwimmer.getAgeGroup() == "senior"){
+               priceToPay = 1600;
+            }else if(compSwimmer.getAgeGroup() == "pensioner"){
+               priceToPay = 1200;
+            }
+         }   
+         }else{
+            priceToPay = 500;
          }
-      }else{
-         priceToPay = 500;
-      }
       
+      System.out.println("The price is: " + priceToPay);
       System.out.println("Enter amount paid: ");
       int amountPaid = input.nextInt();
       

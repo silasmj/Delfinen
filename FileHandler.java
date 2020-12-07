@@ -6,6 +6,15 @@ public class FileHandler{
   private ArrayList<Trainer> trainerList = new ArrayList<>();
   private ArrayList<Tournament> tournamentList = new ArrayList<>();
   
+   public void createFile() throws IOException   {
+      File mFile = new File("member.txt");
+      File tFile = new File("trainer.txt");
+      File toFile = new File("tournament.txt");
+      mFile.createNewFile();
+      tFile.createNewFile();
+      toFile.createNewFile();
+   }
+   
    public void printMemberFromFile() throws FileNotFoundException  {
       File f = new File("member.txt");
       Scanner read = new Scanner(f);
