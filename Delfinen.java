@@ -61,7 +61,11 @@ public class Delfinen   {
    public static void showMembers(Scanner input, FileHandler filehandler){
       System.out.println("==========Members==========");
       for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
-         System.out.println("First name: " + filehandler.getMemberList().get(i).getFirstName() + "\nLast Name: " + filehandler.getMemberList().get(i).getLastName() + "\nAge: " + filehandler.getMemberList().get(i).getAge() + "\nEmail: " + filehandler.getMemberList().get(i).getEmail() + "\nPhone Number: " + filehandler.getMemberList().get(i).getPhoneNumber() + "\nId: " + filehandler.getMemberList().get(i).getId() + "\nActive or passive - True for active, false for passive: " + filehandler.getMemberList().get(i).getActive() + "\nArrears: " + filehandler.getMemberList().get(i).getArrears() + "\n====================");
+         if(filehandler.getMemberList().get(i).getClass().getName() == "CompetetiveSwimmer"){
+           System.out.println(filehandler.getMemberList().get(i) + "\n====================");
+         }else{
+           System.out.println(filehandler.getMemberList().get(i) + "\n====================");
+         }
       }
       System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
       int s = input.nextInt();
@@ -156,7 +160,10 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       if(swimmer == 2){
          System.out.println("Enter swim style: ");
          swimStyle = input.next();
-         compSwimmer = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears, swimStyle);
+         System.out.println(filehandler.getTrainerList());
+         System.out.println("Enter the id of the trainer, that you want to be affiliated with the competitive swimmer: ");
+         int trainerId = input.nextInt();
+         compSwimmer = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears, swimStyle, trainerId);
       } else if(swimmer == 1){
         normalSwimmer = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears);
       }
