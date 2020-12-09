@@ -59,14 +59,28 @@ public class Delfinen   {
    }
    
    public static void showMembers(Scanner input, FileHandler filehandler){
+      ArrayList<Member>swimmerList = new ArrayList<>();
+      ArrayList<CompetetiveSwimmer>competitiveSwimmerList = new ArrayList<>();
       System.out.println("==========Members==========");
       for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
          if(filehandler.getMemberList().get(i).getClass().getName() == "CompetetiveSwimmer"){
-           System.out.println(filehandler.getMemberList().get(i) + "\n====================");
+           competitiveSwimmerList.add((CompetetiveSwimmer)filehandler.getMemberList().get(i));
          }else{
-           System.out.println(filehandler.getMemberList().get(i) + "\n====================");
+           swimmerList.add(filehandler.getMemberList().get(i));
          }
       }
+      if(competitiveSwimmerList.size() != 0){
+         System.out.println("Competitive Swimmer");
+         for(int i = 0; i <= competitiveSwimmerList.size() - 1; i++){
+            System.out.println("First name: " + competitiveSwimmerList.get(i).getFirstName() + "\nLast name: " + competitiveSwimmerList.get(i).getLastName() + "\nAge: " + competitiveSwimmerList.get(i).getAge() + "\nEmail: " + competitiveSwimmerList.get(i).getEmail() + "\nPhone number: " + competitiveSwimmerList.get(i).getPhoneNumber() + "\nId: " + competitiveSwimmerList.get(i).getId() + "\nActive: " + competitiveSwimmerList.get(i).getActive() + "\nArrears: " + competitiveSwimmerList.get(i).getArrears() + "\nSwim style: " + competitiveSwimmerList.get(i).getSwimStyle() + "\nTrainer Id: " + competitiveSwimmerList.get(i).getTrainerId() + "\n===================");
+         }
+      }
+      if(swimmerList.size() != 0){
+         System.out.println("Swimmer");
+         for(int i = 0; i <= swimmerList.size() - 1; i++){
+            System.out.println("First name: " + swimmerList.get(i).getFirstName() + "\nLast name: " + swimmerList.get(i).getLastName() + "\nAge: " + swimmerList.get(i).getAge() + "\nEmail: " + swimmerList.get(i).getEmail() + "\nPhone number: " + swimmerList.get(i).getPhoneNumber() + "\nId: " + swimmerList.get(i).getId() + "\nActive: " + swimmerList.get(i).getActive() + "\nArrears: " + swimmerList.get(i).getArrears() + "\n===================");
+         }
+      }  
       System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
       int s = input.nextInt();
       if(s == 1){
@@ -160,9 +174,12 @@ public static void showTrainers(Scanner input, FileHandler filehandler){
       if(swimmer == 2){
          System.out.println("Enter swim style: ");
          swimStyle = input.next();
-         System.out.println(filehandler.getTrainerList());
-         System.out.println("Enter the id of the trainer, that you want to be affiliated with the competitive swimmer: ");
-         int trainerId = input.nextInt();
+         int trainerId = -1;
+         if(filehandler.getTrainerList().size() != 0){
+            System.out.println(filehandler.getTrainerList());
+            System.out.println("Enter the id of the trainer, that you want to be affiliated with the competitive swimmer: ");
+            trainerId = input.nextInt();
+         }   
          compSwimmer = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears, swimStyle, trainerId);
       } else if(swimmer == 1){
         normalSwimmer = new Member(firstName, lastName, age, email, phoneNumber, getFreeMemberID(filehandler), active, arrears);

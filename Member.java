@@ -22,6 +22,8 @@ public class Member {
    public Member(){
    
    }
+   
+   @Override
    public String toString()   {
       String sActive;
       if(active == true)  {

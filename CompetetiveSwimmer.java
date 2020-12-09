@@ -14,6 +14,7 @@ public class CompetetiveSwimmer extends Member {
     public CompetetiveSwimmer() {
     }
     
+    
     public String toString() {
       return "Competetive Swimmer" + "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nEmail: " + getEmail() + "\nPhone number: " + getPhoneNumber() + "\nId: " + getId() + "\nActive or passive: " + getActive() + "\nArrears: " + getArrears() + "\nSwim style: " + swimStyle + "\nTrainer Id: " + trainerId;
     }
