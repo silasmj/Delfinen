@@ -40,19 +40,19 @@ public class Member {
       return arrears;
    }
 	public void setFirstName(String fn) {
-		this.firstName = firstName;
+		firstName = fn;
 	}
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setLastName(String ln)	{
-		this.lastName = lastName;
+		lastName = ln;
 	}
 	public String getLastName() {
 		return lastName;
 	}
    public void setAge(int a) {
-      this.age = age;
+      age = a;
    }
    public int getAge()  {
       return age;
@@ -64,7 +64,7 @@ public class Member {
       return email;
    }
    public void setPhoneNumber(int pn)  {
-      this.phoneNumber = phoneNumber;
+      phoneNumber = pn;
    }
    public int getPhoneNumber()   {
       return phoneNumber;

@@ -81,7 +81,7 @@ public class Delfinen   {
             System.out.println("First name: " + swimmerList.get(i).getFirstName() + "\nLast name: " + swimmerList.get(i).getLastName() + "\nAge: " + swimmerList.get(i).getAge() + "\nEmail: " + swimmerList.get(i).getEmail() + "\nPhone number: " + swimmerList.get(i).getPhoneNumber() + "\nId: " + swimmerList.get(i).getId() + "\nActive: " + swimmerList.get(i).getActive() + "\nArrears: " + swimmerList.get(i).getArrears() + "\n===================");
          }
       }  
-      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member\n4 = Back");
+      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member \n4 = Show Arrears\n5 = Back");
       int s = input.nextInt();
       if(s == 1){
          createNewMember(input, filehandler);  
@@ -96,8 +96,11 @@ public class Delfinen   {
          int selectedId = input.nextInt();
          //editMember(input, filehandler, selectedId);
          showMembers(input, filehandler);  
-      }else if(s == 4){
+      }else if(s == 5){
          showData(input, filehandler);
+      }else if(s == 4){
+         showArrears(input, filehandler);
+         mainMenu(input, filehandler);
       }
    }
    
@@ -353,6 +356,151 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          }
    }
    
+       public static void editMember(Scanner input, FileHandler filehandler, int selectedId){
+      Member tempMember = new Member();
+      int index = 0;
+      
+      for (Member currentMember : filehandler.getMemberList()){
+         if(currentMember.getId() == selectedId){
+            tempMember = currentMember;
+            break;
+         }
+         index++;
+      }
+      
+      int menuChoice = 0;
+      if(tempMember.getClass().getName() == "CompetetiveSwimmer"){
+         System.out.print("What would you like to do with: " + tempMember.getFirstName() + "\n1 Edit information | 2 Edit Tournaments");
+         if(tempMember.getArrears() > 0){
+            System.out.print(" | 3 Edit Arrears");
+         }
+         System.out.println();
+         menuChoice = input.nextInt();
+      }else{
+         System.out.print("What would you like to do with: " + tempMember.getFirstName() + "\n1 Edit information");
+         if(tempMember.getArrears() > 0){
+            System.out.print(" | 3 Edit Arrears");
+         }
+         System.out.println();
+         menuChoice = input.nextInt();
+      }
+      
+      if(menuChoice == 2 && tempMember.getClass().getName() == "CompetetiveSwimmer"){
+          CompetetiveSwimmer tempCompetitiveSwimmer;
+          tempCompetitiveSwimmer = (CompetetiveSwimmer)tempMember;
+         if(tempCompetitiveSwimmer.getListOfTournaments().size() > 0){
+            for (int memberTournamentId : tempCompetitiveSwimmer.getListOfTournaments()){
+               for (Tournament currentTournament : filehandler.getTournamentList()){
+                  if(memberTournamentId == currentTournament.getId()){
+                      System.out.println(currentTournament + "\n======");
+                  }
+               }
+            }
+         }else{
+            System.out.println("This swimmer got no tournaments");
+         }
+
+         System.out.println("1: Add new tournament | 2: Delete tournament from swimmer | 3: Back");
+         int tournamentChoice = input.nextInt();
+         if(tournamentChoice == 1){
+             if(filehandler.getTournamentList().size() == 0){
+                 System.out.println("There's not tournament available");
+             }else{
+                 for (Tournament currentTournament : filehandler.getTournamentList()){
+                     System.out.println(currentTournament + "\n======");
+                 }
+             }
+             System.out.println("Select tournament to add it to the swimmer");
+             int selectedTournamentID = input.nextInt();
+             tempCompetitiveSwimmer.getListOfTournaments().add(selectedTournamentID);
+             filehandler.getMemberList().set(index, tempCompetitiveSwimmer);
+             editMember(input,filehandler, selectedId);
+         }else if (tournamentChoice == 2){
+             for (int memberTournamentId : tempCompetitiveSwimmer.getListOfTournaments()){
+                 for (Tournament currentTournament : filehandler.getTournamentList()){
+                     if(memberTournamentId == currentTournament.getId()){
+                         System.out.println(currentTournament + "\n======");
+                     }
+                 }
+             }
+             System.out.println("Type id to delete");
+             int selectedTournamentId = input.nextInt();
+             for(int i = 0; i <= tempCompetitiveSwimmer.getListOfTournaments().size() -1; i++){
+                 if(tempCompetitiveSwimmer.getListOfTournaments().get(i) == selectedTournamentId){
+                     tempCompetitiveSwimmer.getListOfTournaments().remove(i);
+                 }
+             }
+             editMember(input,filehandler, selectedId);
+         }else{
+             editMember(input,filehandler, selectedId);
+         }
+      }
+      
+      if(menuChoice == 1){
+         System.out.println("Change firstname from: " + tempMember.getFirstName());
+         String newFirstName = input.next();
+         if(!newFirstName.equalsIgnoreCase("0")){
+            tempMember.setFirstName(newFirstName);
+         }
+         
+         System.out.println("Change lastname from: " + tempMember.getLastName());
+         String newLastName = input.next();
+         if(!newLastName.equalsIgnoreCase("0")){
+            tempMember.setLastName(newLastName);
+         }
+             
+         System.out.println("Change age from: " + tempMember.getAge());
+         int newAge = input.nextInt();
+         if(newAge != 0){
+            tempMember.setAge(newAge);
+         }
+         
+         System.out.println("Change email from: " + tempMember.getEmail());
+         String newEmail = input.next();
+         if(!newEmail.equalsIgnoreCase("0")){
+            tempMember.setEmail(newEmail);
+         }
+         
+         System.out.println("Change phonenumber from: " + tempMember.getPhoneNumber());
+         int newPhoneNumber = input.nextInt();
+         if(newPhoneNumber != 0){
+            tempMember.setPhoneNumber(newPhoneNumber);
+         }
+         
+         System.out.println("Change activity status from: " + tempMember.getActive());
+         boolean newActiveStatus = input.nextBoolean();
+         tempMember.setActive(newActiveStatus);
+
+         if(tempMember.getClass().getName() == "CompetetiveSwimmer"){
+             CompetetiveSwimmer tempCompetitiveSwimmer;
+             tempCompetitiveSwimmer = (CompetetiveSwimmer)tempMember;
+
+            System.out.println("Change preferable Swim style from: " + tempCompetitiveSwimmer.getSwimStyle());
+            String newSwimStyle = input.next();
+            if(!newSwimStyle.equalsIgnoreCase("0")){
+                tempCompetitiveSwimmer.setSwimStyle(newSwimStyle);
+            }
+            
+            for (Trainer currentTrainer : filehandler.getTrainerList()){
+               System.out.println(currentTrainer);
+            }
+            System.out.println("Change trainer ID from: " + tempCompetitiveSwimmer.getTrainerId());
+            int newTrainerId = input.nextInt();
+             tempCompetitiveSwimmer.setTrainerId(newTrainerId);
+         }
+
+         
+         System.out.println("The changes looks like this: \n" + tempMember + "\nWould you like to save these changes? (1 = true / 2 = false)");
+         int answer = input.nextInt();
+         if(answer == 1){
+            filehandler.getMemberList().set(index, tempMember);
+            showMembers(input, filehandler);
+         }else{
+            showMembers(input, filehandler);
+         }
+      }
+    }
+   
    public static void saveData(Scanner input, FileHandler filehandler){
      try{
          filehandler.printMemberToFile();
@@ -369,15 +517,34 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          if(selectedId == selectedMember.getId()){
             System.out.println("You sure you want to delete: " + selectedMember.getFirstName() + " (True/False)");
             Boolean confirmDeletion = input.nextBoolean();
+            if(selectedMember.getArrears() > 0)  {
+               System.out.println("The member got " + selectedMember.getArrears() + " left to pay");
+               System.out.println("Has the member paid the remaining arrears? yes/no");
+               String ans = input.next();
+            if(ans.equalsIgnoreCase("yes"))  {
+               System.out.println("Perfect - deleting member ...");
+            }else{
+               System.out.println("Are you sure you want to delete the member. The member still got " + selectedMember.getArrears() + " left to pay - yes/no");
+               String confirm = input.next();
+               if(confirm.equalsIgnoreCase("No"))  {
+                  showMembers(input, filehandler);
+               }else if(confirm.equalsIgnoreCase("yes"))  {
+                  confirmDeletion = true;
+               }
+            }   
             if(confirmDeletion == true){
                filehandler.getMemberList().remove(index);
-            }
+               System.out.println("Member deleted");
+            }   
+            
             break;
          }
+        } 
          index++;
       }
+     
       showMembers(input, filehandler);
-    }
+   } 
    public static void deleteTournament(Scanner input, FileHandler filehandler, int selectedId){
       int index = 0;
       for (Tournament selectedTournament : filehandler.getTournamentList()){
@@ -437,4 +604,14 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       }
       showTrainers(input, filehandler);
     }
+   public static void showArrears(Scanner input, FileHandler filehandler){
+      System.out.println("======Members with arrears======");
+      for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++) {
+         if(filehandler.getMemberList().get(i).getArrears() > 0){
+            System.out.println(filehandler.getMemberList().get(i));
+            System.out.println("=======================");
+         }
+      }
+      System.out.println();
+   }
 }

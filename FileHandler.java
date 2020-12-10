@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class FileHandler{
+public class FileHandler implements Comparator<Member>{
   private ArrayList<Member> memberList = new ArrayList<>();
   private ArrayList<Trainer> trainerList = new ArrayList<>();
   private ArrayList<Tournament> tournamentList = new ArrayList<>();
@@ -14,6 +14,15 @@ public class FileHandler{
       tFile.createNewFile();
       toFile.createNewFile();
    }
+
+ /*  public int compare (Member m1, Member m2){
+      int comparison = 0;
+      comparison = m1.memberList.getArrears().compareTo(m2.memberList.getArrears());
+      if(comparison == 0)  {
+         comparison = m1.memberList.getFirstName().compareTo(m2.memberList.getFirstName());
+      }
+      return comparison;
+   }*/
    
    public void printMemberFromFile() throws FileNotFoundException  {
       File f = new File("member.txt");
@@ -29,8 +38,15 @@ public class FileHandler{
          int id = lineScan.nextInt();
          Boolean active = lineScan.nextBoolean();
          int arrears = lineScan.nextInt();
-         Member m1 = new Member(firstName, lastName, age, email, phoneNumber, id, active, arrears);
-         memberList.add(m1);
+         if(lineScan.hasNext()){
+            String swimStyle = lineScan.next();
+            int trainerId = lineScan.nextInt();
+            CompetetiveSwimmer compS = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, id, active, arrears, swimStyle, trainerId);
+            memberList.add(compS);
+         }else{
+            Member m1 = new Member(firstName, lastName, age, email, phoneNumber, id, active, arrears);
+            memberList.add(m1);
+         }
       } 
    }
    public void printTrainerFromFile() throws FileNotFoundException{
@@ -66,12 +82,18 @@ public class FileHandler{
       try {
          PrintStream write = new PrintStream(new File("member.txt"));
          for(int i = 0; i <= memberList.size() - 1; i++){
-             write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive() + " " + memberList.get(i).getArrears());
-             if(i != memberList.size() - 1){
+            if(memberList.get(i).getClass().getName() == "CompetetiveSwimmer"){
+                CompetetiveSwimmer tempCompSwimmer;
+                tempCompSwimmer = (CompetetiveSwimmer) memberList.get(i);
+                write.print(tempCompSwimmer.getFirstName() + " " + tempCompSwimmer.getLastName() + " " + tempCompSwimmer.getAge() + " " + tempCompSwimmer.getEmail() + " " + tempCompSwimmer.getPhoneNumber() + " " + tempCompSwimmer.getId() + " " + tempCompSwimmer.getActive() + " " + tempCompSwimmer.getArrears() + " " + tempCompSwimmer.getSwimStyle() + " " + tempCompSwimmer.getTrainerId());
+            }else{  
+                write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive() + " " + memberList.get(i).getArrears());      
+            }
+            if(i != memberList.size() - 1){
                  write.print("\n");
-             }
-         }
-      } catch (FileNotFoundException e) {
+            } 
+          }   
+      }catch (FileNotFoundException e) {
          e.printStackTrace();
       }
    }

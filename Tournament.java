@@ -18,7 +18,7 @@ public class Tournament{
    }
 
    public String toString(){
-      return "Date: " + date + "\nswimStyle: " + swimStyle + "\nID: " + Id + "\nplacement: " + placement + "\ntime: " + time;
+      return "ID: " + Id + "\nDate: " + date + "\nswimStyle: " + swimStyle + "\nplacement: " + placement + "\ntime: " + time;
    }
 
    public String getDate(){

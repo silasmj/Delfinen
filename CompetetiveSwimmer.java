@@ -32,6 +32,9 @@ public class CompetetiveSwimmer extends Member {
     public void setTrainerId(int trainerId){
       this.trainerId = trainerId;
     }
+    public ArrayList <Integer> getListOfTournaments(){
+      return listOfTournaments;
+    }
    
 
 }
