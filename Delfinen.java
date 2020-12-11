@@ -94,7 +94,7 @@ public class Delfinen   {
       }else if(s == 3){
          System.out.println("Give the Id of the member you want to edit:");
          int selectedId = input.nextInt();
-         //editMember(input, filehandler, selectedId);
+         editMember(input, filehandler, selectedId);
          showMembers(input, filehandler);  
       }else if(s == 5){
          showData(input, filehandler);
@@ -356,7 +356,7 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          }
    }
    
-       public static void editMember(Scanner input, FileHandler filehandler, int selectedId){
+   public static void editMember(Scanner input, FileHandler filehandler, int selectedId){
       Member tempMember = new Member();
       int index = 0;
       
@@ -370,14 +370,14 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       
       int menuChoice = 0;
       if(tempMember.getClass().getName() == "CompetetiveSwimmer"){
-         System.out.print("What would you like to do with: " + tempMember.getFirstName() + "\n1 Edit information | 2 Edit Tournaments");
+         System.out.print("What would you like to do with: " + tempMember.getFirstName() + "\n1 Edit information | 2 Edit Tournaments | 3 Back");
          if(tempMember.getArrears() > 0){
-            System.out.print(" | 3 Edit Arrears");
+            System.out.print(" | 4 Edit Arrears");
          }
          System.out.println();
          menuChoice = input.nextInt();
       }else{
-         System.out.print("What would you like to do with: " + tempMember.getFirstName() + "\n1 Edit information");
+         System.out.print("What would you like to do with: " + tempMember.getFirstName() + "\n1 Edit information | 2 Back");
          if(tempMember.getArrears() > 0){
             System.out.print(" | 3 Edit Arrears");
          }
@@ -434,6 +434,25 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          }else{
              editMember(input,filehandler, selectedId);
          }
+      }
+      
+      if(menuChoice == 3 && tempMember.getClass().getName() == "CompetetiveSwimmer" || menuChoice == 2 && tempMember.getClass().getName() == "Member"){
+         showMembers(input, filehandler);
+      }
+      
+      if(menuChoice == 4 && tempMember.getArrears() > 0 && tempMember.getClass().getName() == "CompetetiveSwimmer" || menuChoice == 3 && tempMember.getArrears() > 0 && tempMember.getClass().getName() == "Member"){
+         System.out.println("This member needs to pay: " + tempMember.getArrears() + "\nType in the amount the member just paid: ");
+         int newPayment = input.nextInt();
+         int newArrears = calculateArrears(tempMember.getArrears(), newPayment);
+         if(newArrears > 0){
+            System.out.println("The member now needs to pay: " + newArrears);
+         }else if(newArrears < 0){
+            System.out.println("The member needs " + newArrears + " back");
+         }else{
+            System.out.println("The member got no arrears");
+         }
+         tempMember.setArrears(newArrears);
+         editMember(input, filehandler, selectedId);
       }
       
       if(menuChoice == 1){
@@ -613,5 +632,16 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          }
       }
       System.out.println();
+      System.out.println("1: Edit member | 2: Back");
+      int answer = input.nextInt();
+      if(answer == 1){
+         System.out.println("Enter the ID of the member, you want to edit: ");
+         int selectedId = input.nextInt();
+         editMember(input, filehandler, selectedId);
+      }else if(answer == 2){
+         showMembers(input, filehandler);
+      }
+
+      
    }
 }

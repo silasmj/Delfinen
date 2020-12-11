@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class FileHandler implements Comparator<Member>{
+public class FileHandler{
   private ArrayList<Member> memberList = new ArrayList<>();
   private ArrayList<Trainer> trainerList = new ArrayList<>();
   private ArrayList<Tournament> tournamentList = new ArrayList<>();
