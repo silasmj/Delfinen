@@ -35,6 +35,13 @@ public class FileHandler{
             int trainerId = lineScan.nextInt();
             CompetetiveSwimmer compS = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, id, active, arrears, swimStyle, trainerId);
             memberList.add(compS);
+            String tournaments = lineScan.next();
+            String[] array1 = tournaments.split(",");
+            for(int i = 0; i <= array1.length - 1; i++) {
+               int value = Integer.parseInt(array1[i]);
+               compS.getListOfTournaments().add(value);
+            }
+            
          }else{
             Member m1 = new Member(firstName, lastName, age, email, phoneNumber, id, active, arrears);
             memberList.add(m1);
@@ -77,7 +84,15 @@ public class FileHandler{
             if(memberList.get(i).getClass().getName() == "CompetetiveSwimmer"){
                 CompetetiveSwimmer tempCompSwimmer;
                 tempCompSwimmer = (CompetetiveSwimmer) memberList.get(i);
-                write.print(tempCompSwimmer.getFirstName() + " " + tempCompSwimmer.getLastName() + " " + tempCompSwimmer.getAge() + " " + tempCompSwimmer.getEmail() + " " + tempCompSwimmer.getPhoneNumber() + " " + tempCompSwimmer.getId() + " " + tempCompSwimmer.getActive() + " " + tempCompSwimmer.getArrears() + " " + tempCompSwimmer.getSwimStyle() + " " + tempCompSwimmer.getTrainerId());
+                String stringOfValues = "";
+                for(int k = 0; k <= tempCompSwimmer.getListOfTournaments().size() -1; k++){
+                    if(k != tempCompSwimmer.getListOfTournaments().size() - 1){
+                        stringOfValues = stringOfValues + tempCompSwimmer.getListOfTournaments().get(k) + ",";
+                    }else{
+                        stringOfValues = stringOfValues + tempCompSwimmer.getListOfTournaments().get(k);
+                    }
+                }
+                write.print(tempCompSwimmer.getFirstName() + " " + tempCompSwimmer.getLastName() + " " + tempCompSwimmer.getAge() + " " + tempCompSwimmer.getEmail() + " " + tempCompSwimmer.getPhoneNumber() + " " + tempCompSwimmer.getId() + " " + tempCompSwimmer.getActive() + " " + tempCompSwimmer.getArrears() + " " + tempCompSwimmer.getSwimStyle() + " " + tempCompSwimmer.getTrainerId() + " " + stringOfValues);
             }else{  
                 write.print(memberList.get(i).getFirstName() + " " + memberList.get(i).getLastName() + " " + memberList.get(i).getAge() + " " + memberList.get(i).getEmail() + " " + memberList.get(i).getPhoneNumber() + " " + memberList.get(i).getId() + " " + memberList.get(i).getActive() + " " + memberList.get(i).getArrears());      
             }
