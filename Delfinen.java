@@ -637,7 +637,7 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       
    }
    
-public static double getSwimmerBestTime(int selectedID, FileHandler filehandler) {
+   public static double getSwimmerBestTime(int selectedID, FileHandler filehandler) {
         ArrayList<Double> listOfTimes = new ArrayList<>();
         for (int i = 0; i <= filehandler.getMemberList().size() - 1; i++) {
             if (filehandler.getMemberList().get(i).getId() == selectedID) {
@@ -651,14 +651,19 @@ public static double getSwimmerBestTime(int selectedID, FileHandler filehandler)
                     }
                 }
                 Collections.sort(listOfTimes);
-                comp1.setBestTime(listOfTimes.get(0));
+                if(listOfTimes.size() != 0){
+                   comp1.setBestTime(listOfTimes.get(0));
+                }
                 break;
             }
         }
-        return listOfTimes.get(0);
+        if(listOfTimes.size() != 0){
+            return listOfTimes.get(0);
+        }
+        return -1.0;
     }
     
-        public static void showTopSwimmers(Scanner input, FileHandler filehandler) {
+    public static void showTopSwimmers(Scanner input, FileHandler filehandler) {
         ArrayList<CompetetiveSwimmer> medleyList = new ArrayList<>();
         ArrayList<CompetetiveSwimmer> backCrawlList = new ArrayList<>();
         ArrayList<CompetetiveSwimmer> butterFlyList = new ArrayList<>();
@@ -692,37 +697,40 @@ public static double getSwimmerBestTime(int selectedID, FileHandler filehandler)
         if(medleyList.size() != 0){
             System.out.println("===Medley list===");
             for(int i = 0; i <= medleyList.size() -1; i++){
-                System.out.println(medleyList.get(i) + "\n======");
+                System.out.println("Name: " + medleyList.get(i).getFirstName() + "\nBest Time: " + medleyList.get(i).getBestTime() + "\nSwim Style: " + medleyList.get(i).getSwimStyle() + "\n======");
             }
         }
         if(backCrawlList.size() != 0){
             System.out.println("===Back Crawl===");
             for(int i = 0; i <= backCrawlList.size() -1; i++){
-                System.out.println(backCrawlList.get(i) + "\n======");
+                System.out.println("Name: " + backCrawlList.get(i).getFirstName() + "\nBest Time: " + backCrawlList.get(i).getBestTime() + "\nSwim Style: " + backCrawlList.get(i).getSwimStyle() + "\n======");
             }
         }
         if(butterFlyList.size() != 0){
             System.out.println("===Butterfly list===");
             for(int i = 0; i <= butterFlyList.size() -1; i++){
-                System.out.println(butterFlyList.get(i) + "\n======");
+                System.out.println("Name: " + butterFlyList.get(i).getFirstName() + "\nBest Time: " + butterFlyList.get(i).getBestTime() + "\nSwim Style: " + butterFlyList.get(i).getSwimStyle() + "\n======");
             }
         }
         if(breaststrokeList.size() != 0){
             System.out.println("===Breast Stroke list===");
             for(int i = 0; i <= breaststrokeList.size() -1; i++){
-                System.out.println(breaststrokeList.get(i) + "\n======");
+                System.out.println("Name: " + breaststrokeList.get(i).getFirstName() + "\nBest Time: " + breaststrokeList.get(i).getBestTime() + "\nSwim Style: " + breaststrokeList.get(i).getSwimStyle() + "\n======");
             }
         }
-
         if(crawlList.size() != 0){
             System.out.println("===Crawl list===");
             for(int i = 0; i <= crawlList.size() -1; i++){
-                System.out.println(crawlList.get(i) + "\n======");
+                System.out.println("Name: " + crawlList.get(i).getFirstName() + "\nBest Time: " + crawlList.get(i).getBestTime() + "\nSwim Style: " + crawlList.get(i).getSwimStyle() + "\n======");
             }
         }
+        System.out.println("Type 1 for Swimmer menu");
         int option = input.nextInt();
+        if(option == 1){
+            showMembers(input, filehandler);
+        }
     }
-
+    
     static class SwimmerComparator implements Comparator<CompetetiveSwimmer>{
         public int compare(CompetetiveSwimmer swimmer1, CompetetiveSwimmer swimmer2){
             if(swimmer1.getBestTime() > swimmer2.getBestTime()){

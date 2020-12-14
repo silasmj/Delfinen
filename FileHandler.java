@@ -35,11 +35,13 @@ public class FileHandler{
             int trainerId = lineScan.nextInt();
             CompetetiveSwimmer compS = new CompetetiveSwimmer(firstName, lastName, age, email, phoneNumber, id, active, arrears, swimStyle, trainerId);
             memberList.add(compS);
-            String tournaments = lineScan.next();
-            String[] array1 = tournaments.split(",");
-            for(int i = 0; i <= array1.length - 1; i++) {
-               int value = Integer.parseInt(array1[i]);
-               compS.getListOfTournaments().add(value);
+            if(lineScan.hasNext()){
+               String tournaments = lineScan.next();
+               String[] array1 = tournaments.split(",");
+               for(int i = 0; i <= array1.length - 1; i++) {
+                  int value = Integer.parseInt(array1[i]);
+                  compS.getListOfTournaments().add(value);
+               }
             }
             
          }else{
