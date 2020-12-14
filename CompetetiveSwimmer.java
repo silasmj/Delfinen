@@ -4,6 +4,7 @@ public class CompetetiveSwimmer extends Member {
     private String swimStyle;
     private ArrayList<Integer> listOfTournaments = new ArrayList<>();
     private int trainerId;
+    private double bestTime;
 
     public CompetetiveSwimmer(String firstName, String lastName, int age, String email, int phoneNumber, int id, Boolean active, int arrears, String swimStyle, int trainerId){
       super(firstName, lastName, age, email, phoneNumber, id, active, arrears);
@@ -21,7 +22,13 @@ public class CompetetiveSwimmer extends Member {
     public String getSwimStyle(){
       return swimStyle;
     }
-    
+
+    public double getBestTime() {
+        return bestTime;
+    }
+    public void setBestTime(double bestTime) {
+        this.bestTime = bestTime;
+    }
     public void setSwimStyle(String swimStyle){
       this.swimStyle = swimStyle;
     }
@@ -34,6 +41,4 @@ public class CompetetiveSwimmer extends Member {
     public ArrayList <Integer> getListOfTournaments(){
       return listOfTournaments;
     }
-   
-
 }

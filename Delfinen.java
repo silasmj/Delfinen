@@ -9,26 +9,16 @@ public class Delfinen   {
       input.useLocale(Locale.US);
       
       FileHandler filehandler = new FileHandler();
-      //showMembers(input, filehandler);
-      
+
       filehandler.createFile();
-      //createNewMember(input, filehandler);
-      //createTrainer(input, filehandler);
-      //createNewTournament(input, filehandler);
-      
-      //filehandler.printMemberToFile();
+
       filehandler.printMemberFromFile();
       
-      //filehandler.printTrainerToFile();
       filehandler.printTrainerFromFile();
-     
-      
-      //filehandler.printTournamentToFile();
+
       filehandler.printTournamentFromFile();
       
-      //System.out.println(filehandler.memberList);
-      //System.out.println(filehandler.trainerList);
-      //System.out.println(filehandler.tournamentList);
+
       
       mainMenu(input, filehandler);
    }
@@ -60,55 +50,53 @@ public class Delfinen   {
       }
    }
    
-   public static void showMembers(Scanner input, FileHandler filehandler){
-      ArrayList<Member>swimmerList = new ArrayList<>();
-      ArrayList<CompetetiveSwimmer>competitiveSwimmerList = new ArrayList<>();
-      System.out.println("==========Members==========");
-      for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
-         if(filehandler.getMemberList().get(i).getClass().getName() == "CompetetiveSwimmer"){
-           competitiveSwimmerList.add((CompetetiveSwimmer)filehandler.getMemberList().get(i));
-         }else{
-           swimmerList.add(filehandler.getMemberList().get(i));
-         }
-      }
-      if(competitiveSwimmerList.size() != 0){
-         System.out.println("Competitive Swimmer");
-         for(int i = 0; i <= competitiveSwimmerList.size() - 1; i++){
-            System.out.println("First name: " + competitiveSwimmerList.get(i).getFirstName() + "\nLast name: " + competitiveSwimmerList.get(i).getLastName() + "\nAge: " + competitiveSwimmerList.get(i).getAge() + "\nEmail: " + competitiveSwimmerList.get(i).getEmail() + "\nPhone number: " + competitiveSwimmerList.get(i).getPhoneNumber() + "\nId: " + competitiveSwimmerList.get(i).getId() + "\nActive: " + competitiveSwimmerList.get(i).getActive() + "\nArrears: " + competitiveSwimmerList.get(i).getArrears() + "\nSwim style: " + competitiveSwimmerList.get(i).getSwimStyle() + "\nTrainer Id: " + competitiveSwimmerList.get(i).getTrainerId() + "\n===================");
-         }
-      }
-      if(swimmerList.size() != 0){
-         System.out.println("Swimmer");
-         for(int i = 0; i <= swimmerList.size() - 1; i++){
-            System.out.println("First name: " + swimmerList.get(i).getFirstName() + "\nLast name: " + swimmerList.get(i).getLastName() + "\nAge: " + swimmerList.get(i).getAge() + "\nEmail: " + swimmerList.get(i).getEmail() + "\nPhone number: " + swimmerList.get(i).getPhoneNumber() + "\nId: " + swimmerList.get(i).getId() + "\nActive: " + swimmerList.get(i).getActive() + "\nArrears: " + swimmerList.get(i).getArrears() + "\n===================");
-         }
-      }  
-      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member \n4 = Show Arrears\n5 = Show top 5 swimmers\n6 = Back");
-      int s = input.nextInt();
-      if(s == 1){
-         createNewMember(input, filehandler);  
-         showMembers(input, filehandler);     
-      }else if(s == 2){
-         System.out.println("Give the Id of the member you want to delete:");
-         int selectedId = input.nextInt();
-         deleteMember(input, filehandler, selectedId);
-         showMembers(input, filehandler);  
-      }else if(s == 3){
-         System.out.println("Give the Id of the member you want to edit:");
-         int selectedId = input.nextInt();
-         editMember(input, filehandler, selectedId);
-         showMembers(input, filehandler);  
-      }else if(s == 6){
-         showData(input, filehandler);
-      }else if(s == 4){
-         showArrears(input, filehandler);
-         mainMenu(input, filehandler);
-      }else if(s == 5){
-         int selectedId = input.nextInt(); 
-         getSwimmerBestTime(selectedId, filehandler);
-      }
-   }
-   
+    public static void showMembers(Scanner input, FileHandler filehandler) {
+        ArrayList<Member> swimmerList = new ArrayList<>();
+        ArrayList<CompetetiveSwimmer> competitiveSwimmerList = new ArrayList<>();
+        System.out.println("==========Members==========");
+        for (int i = 0; i <= filehandler.getMemberList().size() - 1; i++) {
+            if (filehandler.getMemberList().get(i).getClass().getName() == "CompetetiveSwimmer") {
+                competitiveSwimmerList.add((CompetetiveSwimmer) filehandler.getMemberList().get(i));
+            } else {
+                swimmerList.add(filehandler.getMemberList().get(i));
+            }
+        }
+        if (competitiveSwimmerList.size() != 0) {
+            System.out.println("Competitive Swimmer");
+            for (int i = 0; i <= competitiveSwimmerList.size() - 1; i++) {
+                System.out.println("First name: " + competitiveSwimmerList.get(i).getFirstName() + "\nLast name: " + competitiveSwimmerList.get(i).getLastName() + "\nAge: " + competitiveSwimmerList.get(i).getAge() + "\nEmail: " + competitiveSwimmerList.get(i).getEmail() + "\nPhone number: " + competitiveSwimmerList.get(i).getPhoneNumber() + "\nId: " + competitiveSwimmerList.get(i).getId() + "\nActive: " + competitiveSwimmerList.get(i).getActive() + "\nArrears: " + competitiveSwimmerList.get(i).getArrears() + "\nSwim style: " + competitiveSwimmerList.get(i).getSwimStyle() + "\nTrainer Id: " + competitiveSwimmerList.get(i).getTrainerId() + "\n===================");
+            }
+        }
+        if (swimmerList.size() != 0) {
+            System.out.println("Swimmer");
+            for (int i = 0; i <= swimmerList.size() - 1; i++) {
+                System.out.println("First name: " + swimmerList.get(i).getFirstName() + "\nLast name: " + swimmerList.get(i).getLastName() + "\nAge: " + swimmerList.get(i).getAge() + "\nEmail: " + swimmerList.get(i).getEmail() + "\nPhone number: " + swimmerList.get(i).getPhoneNumber() + "\nId: " + swimmerList.get(i).getId() + "\nActive: " + swimmerList.get(i).getActive() + "\nArrears: " + swimmerList.get(i).getArrears() + "\n===================");
+            }
+        }
+        System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member \n4 = Show Arrears\n5 = Show top 5 swimmers\n6 = Back");
+        int s = input.nextInt();
+        if (s == 1) {
+            createNewMember(input, filehandler);
+            showMembers(input, filehandler);
+        } else if (s == 2) {
+            System.out.println("Give the Id of the member you want to delete:");
+            int selectedId = input.nextInt();
+            deleteMember(input, filehandler, selectedId);
+            showMembers(input, filehandler);
+        } else if (s == 3) {
+            System.out.println("Give the Id of the member you want to edit:");
+            int selectedId = input.nextInt();
+            editMember(input, filehandler, selectedId);
+            showMembers(input, filehandler);
+        } else if (s == 6) {
+            showData(input, filehandler);
+        } else if (s == 4) {
+            showArrears(input, filehandler);
+            mainMenu(input, filehandler);
+        } else if (s == 5) {
+            showTopSwimmers(input, filehandler);
+        }
+    }
 public static void showTrainers(Scanner input, FileHandler filehandler){
       System.out.println("==========Trainers==========");
       for(int i = 0; i <= filehandler.getTrainerList().size() - 1; i++){
@@ -493,7 +481,6 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
          
          System.out.println("Change activity status from: " + tempMember.getActive());
          boolean newActiveStatus = input.nextBoolean();
-         tempMember.setActive(newActiveStatus);
 
          if(tempMember.getClass().getName() == "CompetetiveSwimmer"){
              CompetetiveSwimmer tempCompetitiveSwimmer;
@@ -650,32 +637,101 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       
    }
    
-   public static void getSwimmerBestTime(int selectedID, FileHandler filehandler){
-      ArrayList<Double> listOfTimes = new ArrayList<>();
-      for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
-         if(filehandler.getMemberList().get(i).getId() == selectedID){
-            CompetetiveSwimmer comp1;
-            comp1 =(CompetetiveSwimmer)filehandler.getMemberList().get(i);
-            for(int j = 0; j <= comp1.getListOfTournaments().size() - 1; j++){
-               for(int k = 0; k <= filehandler.getTournamentList().size() - 1; k++){
-                  if(filehandler.getTournamentList().get(k).getId() == comp1.getListOfTournaments().get(j)){
-                     listOfTimes.add(filehandler.getTournamentList().get(k).getTime());
-                  }
-               }
+public static double getSwimmerBestTime(int selectedID, FileHandler filehandler) {
+        ArrayList<Double> listOfTimes = new ArrayList<>();
+        for (int i = 0; i <= filehandler.getMemberList().size() - 1; i++) {
+            if (filehandler.getMemberList().get(i).getId() == selectedID) {
+                CompetetiveSwimmer comp1;
+                comp1 = (CompetetiveSwimmer) filehandler.getMemberList().get(i);
+                for (int j = 0; j <= comp1.getListOfTournaments().size() - 1; j++) {
+                    for (int k = 0; k <= filehandler.getTournamentList().size() - 1; k++) {
+                        if (filehandler.getTournamentList().get(k).getId() == comp1.getListOfTournaments().get(j)) {
+                            listOfTimes.add(filehandler.getTournamentList().get(k).getTime());
+                        }
+                    }
+                }
+                Collections.sort(listOfTimes);
+                comp1.setBestTime(listOfTimes.get(0));
+                break;
             }
-            break;
-         }
-      }
-      /*CompetetiveSwimmer tempComp1 = (CompetetiveSwimmer)comp1;
-      for(int i = 0; i <= tempComp1.getListOfTournaments().size() - 1; i++){
-         for(int k = 0; k <= filehandler.getTournamentList().size() - 1; k++){
-            if(filehandler.getTournamentList().get(k).getId() == tempComp1.getListOfTournaments().get(i)){
-               listOfTimes.add(filehandler.getTournamentList().get(k).getTime());
+        }
+        return listOfTimes.get(0);
+    }
+    
+        public static void showTopSwimmers(Scanner input, FileHandler filehandler) {
+        ArrayList<CompetetiveSwimmer> medleyList = new ArrayList<>();
+        ArrayList<CompetetiveSwimmer> backCrawlList = new ArrayList<>();
+        ArrayList<CompetetiveSwimmer> butterFlyList = new ArrayList<>();
+        ArrayList<CompetetiveSwimmer> breaststrokeList = new ArrayList<>();
+        ArrayList<CompetetiveSwimmer> crawlList = new ArrayList<>();
+
+        for (int i = 0; i <= filehandler.getMemberList().size() -1; i++){
+            CompetetiveSwimmer tempSwimmer;
+            tempSwimmer = (CompetetiveSwimmer)filehandler.getMemberList().get(i);
+
+            tempSwimmer.setBestTime(getSwimmerBestTime(tempSwimmer.getId(), filehandler));
+            if(tempSwimmer.getSwimStyle() == "medley"){
+                medleyList.add(tempSwimmer);
+            }else if(tempSwimmer.getSwimStyle().equalsIgnoreCase("backcrawl")){
+                backCrawlList.add(tempSwimmer);
+            }else if(tempSwimmer.getSwimStyle().equalsIgnoreCase("butterfly")){
+                butterFlyList.add(tempSwimmer);
+            }else if(tempSwimmer.getSwimStyle().equalsIgnoreCase("breaststroke")){
+                breaststrokeList.add(tempSwimmer);
+            }else if(tempSwimmer.getSwimStyle().equalsIgnoreCase("crawl")){
+                crawlList.add(tempSwimmer);
             }
-         }
-      }*/
-      Collections.sort(listOfTimes);
-      System.out.println(listOfTimes);
-   }
-   
+        }
+
+        Collections.sort(crawlList, new SwimmerComparator());
+        Collections.sort(breaststrokeList, new SwimmerComparator());
+        Collections.sort(butterFlyList, new SwimmerComparator());
+        Collections.sort(backCrawlList, new SwimmerComparator());
+        Collections.sort(medleyList, new SwimmerComparator());
+
+        if(medleyList.size() != 0){
+            System.out.println("===Medley list===");
+            for(int i = 0; i <= medleyList.size() -1; i++){
+                System.out.println(medleyList.get(i) + "\n======");
+            }
+        }
+        if(backCrawlList.size() != 0){
+            System.out.println("===Back Crawl===");
+            for(int i = 0; i <= backCrawlList.size() -1; i++){
+                System.out.println(backCrawlList.get(i) + "\n======");
+            }
+        }
+        if(butterFlyList.size() != 0){
+            System.out.println("===Butterfly list===");
+            for(int i = 0; i <= butterFlyList.size() -1; i++){
+                System.out.println(butterFlyList.get(i) + "\n======");
+            }
+        }
+        if(breaststrokeList.size() != 0){
+            System.out.println("===Breast Stroke list===");
+            for(int i = 0; i <= breaststrokeList.size() -1; i++){
+                System.out.println(breaststrokeList.get(i) + "\n======");
+            }
+        }
+
+        if(crawlList.size() != 0){
+            System.out.println("===Crawl list===");
+            for(int i = 0; i <= crawlList.size() -1; i++){
+                System.out.println(crawlList.get(i) + "\n======");
+            }
+        }
+        int option = input.nextInt();
+    }
+
+    static class SwimmerComparator implements Comparator<CompetetiveSwimmer>{
+        public int compare(CompetetiveSwimmer swimmer1, CompetetiveSwimmer swimmer2){
+            if(swimmer1.getBestTime() > swimmer2.getBestTime()){
+                return 1;
+            }else if(swimmer1.getBestTime() < swimmer2.getBestTime()){
+                return -1;
+            }else{
+                return 0;
+            }
+        }
+    }
 }
