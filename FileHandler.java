@@ -15,14 +15,6 @@ public class FileHandler{
       toFile.createNewFile();
    }
 
- /*  public int compare (Member m1, Member m2){
-      int comparison = 0;
-      comparison = m1.memberList.getArrears().compareTo(m2.memberList.getArrears());
-      if(comparison == 0)  {
-         comparison = m1.memberList.getFirstName().compareTo(m2.memberList.getFirstName());
-      }
-      return comparison;
-   }*/
    
    public void printMemberFromFile() throws FileNotFoundException  {
       File f = new File("member.txt");
@@ -73,7 +65,7 @@ public class FileHandler{
          String swimStyle = lineScan.next();
          int id = lineScan.nextInt();
          int placement = lineScan.nextInt();
-         String time = lineScan.next();
+         double time = lineScan.nextDouble();
          Tournament to1 = new Tournament(date, swimStyle, id, placement, time);
          tournamentList.add(to1);
       }
@@ -109,7 +101,9 @@ public class FileHandler{
    public void printTournamentToFile() throws FileNotFoundException{
       PrintStream write = new PrintStream(new File("tournament.txt"));
       for(int i = 0; i <= tournamentList.size() - 1; i++){
-         write.print(tournamentList.get(i).getDate() + " " + tournamentList.get(i).getSwimStyle() + " " + tournamentList.get(i).getId() + " " + tournamentList.get(i).getPlacement() + " " + tournamentList.get(i).getTime());
+         String time = String.valueOf(tournamentList.get(i).getTime());
+         String formattedTime = time.replace(".", ",");
+         write.print(tournamentList.get(i).getDate() + " " + tournamentList.get(i).getSwimStyle() + " " + tournamentList.get(i).getId() + " " + tournamentList.get(i).getPlacement() + " " + formattedTime);
          if(i != tournamentList.size() - 1){
             write.print("\n");
          }

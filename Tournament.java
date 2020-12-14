@@ -4,9 +4,9 @@ public class Tournament{
    private String swimStyle;
    private int Id;
    private int placement;
-   private String time;
+   private double time;
 
-   public Tournament(String date, String swimStyle, int Id, int placement, String time){
+   public Tournament(String date, String swimStyle, int Id, int placement, double time){
       this.date = date;
       this.swimStyle = swimStyle;
       this.Id = Id;
@@ -34,7 +34,7 @@ public class Tournament{
    public int getPlacement(){
       return placement;
    }
-   public String getTime(){
+   public double getTime(){
       return time;
    }
    public void setId(int Id){
@@ -49,7 +49,7 @@ public class Tournament{
    public void setPlacement(int placement){
       this.placement = placement;
    }
-   public void setTime(String time){
+   public void setTime(double time){
       this.time = time;
    }
 }

@@ -40,6 +40,8 @@ public class Delfinen   {
          showData(input, filehandler);
       }else if(s.equalsIgnoreCase("2")){
         saveData(input, filehandler);
+      }else if(s.equalsIgnoreCase("3")){
+         System.exit(0);
       }
    }
    
@@ -81,7 +83,7 @@ public class Delfinen   {
             System.out.println("First name: " + swimmerList.get(i).getFirstName() + "\nLast name: " + swimmerList.get(i).getLastName() + "\nAge: " + swimmerList.get(i).getAge() + "\nEmail: " + swimmerList.get(i).getEmail() + "\nPhone number: " + swimmerList.get(i).getPhoneNumber() + "\nId: " + swimmerList.get(i).getId() + "\nActive: " + swimmerList.get(i).getActive() + "\nArrears: " + swimmerList.get(i).getArrears() + "\n===================");
          }
       }  
-      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member \n4 = Show Arrears\n5 = Back");
+      System.out.println("1 = Create member\n2 = Delete member\n3 = Edit member \n4 = Show Arrears\n5 = Show top 5 swimmers\n6 = Back");
       int s = input.nextInt();
       if(s == 1){
          createNewMember(input, filehandler);  
@@ -96,11 +98,14 @@ public class Delfinen   {
          int selectedId = input.nextInt();
          editMember(input, filehandler, selectedId);
          showMembers(input, filehandler);  
-      }else if(s == 5){
+      }else if(s == 6){
          showData(input, filehandler);
       }else if(s == 4){
          showArrears(input, filehandler);
          mainMenu(input, filehandler);
+      }else if(s == 5){
+         int selectedId = input.nextInt(); 
+         getSwimmerBestTime(selectedId, filehandler);
       }
    }
    
@@ -262,7 +267,7 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
       System.out.println("Enter placement");
       int placement = input.nextInt();
       System.out.println("Enter time");
-      String time = input.next();
+      double time = input.nextDouble();
       Tournament t1 = new Tournament(date, swimStyle, getFreeTournamentID(filehandler), placement, time);
       filehandler.getTournamentList().add(t1);
    }
@@ -339,8 +344,8 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
             tempTour.setPlacement(newPlacement);
          }
          System.out.println("Change the time from: " + tempTour.getTime() + " to: ");
-         String newTime = input.next();
-         if(!newTime.equalsIgnoreCase("0")){
+         double newTime = input.nextDouble();
+         if(newTime == 0){
             tempTour.setTime(newTime);
          }
          System.out.println("Would you confirm these changes: " + tempTour + "\nPress 'Y' for yes \nPress 'N' to remake the edit \nPress 'B' to get back to the main menu");
@@ -644,4 +649,33 @@ public static void createTrainer(Scanner input, FileHandler filehandler){
 
       
    }
+   
+   public static void getSwimmerBestTime(int selectedID, FileHandler filehandler){
+      ArrayList<Double> listOfTimes = new ArrayList<>();
+      for(int i = 0; i <= filehandler.getMemberList().size() - 1; i++){
+         if(filehandler.getMemberList().get(i).getId() == selectedID){
+            CompetetiveSwimmer comp1;
+            comp1 =(CompetetiveSwimmer)filehandler.getMemberList().get(i);
+            for(int j = 0; j <= comp1.getListOfTournaments().size() - 1; j++){
+               for(int k = 0; k <= filehandler.getTournamentList().size() - 1; k++){
+                  if(filehandler.getTournamentList().get(k).getId() == comp1.getListOfTournaments().get(j)){
+                     listOfTimes.add(filehandler.getTournamentList().get(k).getTime());
+                  }
+               }
+            }
+            break;
+         }
+      }
+      /*CompetetiveSwimmer tempComp1 = (CompetetiveSwimmer)comp1;
+      for(int i = 0; i <= tempComp1.getListOfTournaments().size() - 1; i++){
+         for(int k = 0; k <= filehandler.getTournamentList().size() - 1; k++){
+            if(filehandler.getTournamentList().get(k).getId() == tempComp1.getListOfTournaments().get(i)){
+               listOfTimes.add(filehandler.getTournamentList().get(k).getTime());
+            }
+         }
+      }*/
+      Collections.sort(listOfTimes);
+      System.out.println(listOfTimes);
+   }
+   
 }
